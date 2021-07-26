@@ -1,0 +1,9 @@
+abrindo tela de visualização de pagamentos com 200.039 itens cadastrados
+
+-levou 4.7 segundos para carregar a tela;
+
+especificações da máquina em que foi executado o teste (notebook):
+
+-intel core i5 (2 núcleos) 3GHz;
+-RAM 8gb;
+-HD wdc wd10spzx-21z10t0 (5400rpm - notebook)
