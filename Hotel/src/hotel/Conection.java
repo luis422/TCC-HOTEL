@@ -13,31 +13,19 @@ public class Conection {
 
     String nameClass;
     String userClass;
-    String passDB = "";
-    String userDB = "root";
-    String ipDB = "localhost";
-
-    public Conection() {
-        //descobrir a senha do banco de dados entre "" e "1234"
-        try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            try (Connection con = DriverManager.getConnection("jdbc:mysql://" + ipDB + ":3306/hotel?useTimezone=true&serverTimezone=UTC",
-                    userDB, passDB)) {
-                Statement stmt = con.createStatement();
-                stmt.executeQuery("SELECT * FROM funcionarios;");
-            } catch (SQLException ex) {
-                passDB = "1234";
-            }
-        } catch (ClassNotFoundException ex) {
-        }
-    }
+    String passDB = "";			//senha do banco de dados
+    String userDB = "root";		//usuário do banco de dados
+    String nameDB = "hotel";	//nome do banco de dados
+    String ipDB = "127.0.0.1";	//ip do banco de dados
+    String portDB = "3306";		//porta do ip do banco de dados
+    
 
     //==========-----EXECUTA COMANDOS SQL SEM RETORNO(INSERT,UPDATE,DELETE,etc.)-----==========\\
     public void executeComand(String comand, String msg) /*throws SQLException*/ {
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
-            try (Connection con = DriverManager.getConnection("jdbc:mysql://" + ipDB + ":3306/hotel?useTimezone=true&serverTimezone=UTC",
-                    userDB, passDB)) {
+            try (Connection con = DriverManager.getConnection("jdbc:mysql://" + ipDB + ":"
+                    + portDB + "/" + nameDB + "?useTimezone=true&serverTimezone=UTC", userDB, passDB)) {
                 Statement stmt = con.createStatement();
                 stmt.execute(comand);
                 if (msg.equals("")) {
@@ -57,7 +45,7 @@ public class Conection {
             }
         } catch (ClassNotFoundException | SQLIntegrityConstraintViolationException e) {
             //JOptionPane.showMessageDialog(null, e);
-            System.out.println("Erro! campo duplicado: " + e);
+            System.out.println("Erro! campo duplicado:\n" + e);
             if (msg.equals("")) {
             } else if (msg.length() > 0) {
                 MessageStatus m = new MessageStatus(userClass, nameClass, "Erro ao efetuar " + msg.toLowerCase() + ". Já cadastrado.", "erro");
@@ -70,7 +58,7 @@ public class Conection {
             }
         } catch (SQLException e) {
             //JOptionPane.showMessageDialog(null, e);
-            System.out.println("Erro: " + e);
+            System.out.println("Erro inesperado: " + e);
             if (msg.equals("")) {
             } else if (msg.length() > 0) {
 
@@ -87,8 +75,8 @@ public class Conection {
         String nome = "Erro";
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
-            try (Connection con = DriverManager.getConnection("jdbc:mysql://" + ipDB + ":3306/hotel?useTimezone=true&serverTimezone=UTC",
-                    userDB, passDB)) {
+            try (Connection con = DriverManager.getConnection("jdbc:mysql://" + ipDB + ":"
+                    + portDB + "/" + nameDB + "?useTimezone=true&serverTimezone=UTC", userDB, passDB)) {
                 Statement stmt = con.createStatement();
                 ResultSet rs = stmt.executeQuery("SELECT nome FROM reservas,hospedes WHERE id_hospede = idHospede AND id_hospede = " + id + ";");
 
@@ -107,8 +95,8 @@ public class Conection {
         String numero = "";
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
-            try (Connection con = DriverManager.getConnection("jdbc:mysql://" + ipDB + ":3306/hotel?useTimezone=true&serverTimezone=UTC",
-                    userDB, passDB)) {
+            try (Connection con = DriverManager.getConnection("jdbc:mysql://" + ipDB + ":"
+                    + portDB + "/" + nameDB + "?useTimezone=true&serverTimezone=UTC", userDB, passDB)) {
                 Statement stmt = con.createStatement();
                 ResultSet rs = stmt.executeQuery("SELECT num_quarto, dataEntrada, dataSaida FROM reservas,quartos WHERE dataEntrada >= '" + dataEntrada + " 00:00:00' AND dataSaida <= '" + dataSaida + " 00:00:00' AND num_quarto = " + n + ";");
 
@@ -136,8 +124,8 @@ public class Conection {
         int cont = 0;
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
-            try (Connection con = DriverManager.getConnection("jdbc:mysql://" + ipDB + ":3306/hotel?useTimezone=true&serverTimezone=UTC",
-                    userDB, passDB)) {
+            try (Connection con = DriverManager.getConnection("jdbc:mysql://" + ipDB + ":"
+                    + portDB + "/" + nameDB + "?useTimezone=true&serverTimezone=UTC", userDB, passDB)) {
                 Statement stmt = con.createStatement();
                 ResultSet rs = stmt.executeQuery(comand);
 
@@ -167,8 +155,8 @@ public class Conection {
         int cont = 0;
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
-            try (Connection con = DriverManager.getConnection("jdbc:mysql://" + ipDB + ":3306/hotel?useTimezone=true&serverTimezone=UTC",
-                    userDB, passDB)) {
+            try (Connection con = DriverManager.getConnection("jdbc:mysql://" + ipDB + ":"
+                    + portDB + "/" + nameDB + "?useTimezone=true&serverTimezone=UTC", userDB, passDB)) {
                 Statement stmt = con.createStatement();
                 ResultSet rs = stmt.executeQuery(comand);
 
@@ -205,8 +193,8 @@ public class Conection {
         int cont = 0;
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
-            try (Connection con = DriverManager.getConnection("jdbc:mysql://" + ipDB + ":3306/hotel?useTimezone=true&serverTimezone=UTC",
-                    userDB, passDB)) {
+            try (Connection con = DriverManager.getConnection("jdbc:mysql://" + ipDB + ":"
+                    + portDB + "/" + nameDB + "?useTimezone=true&serverTimezone=UTC", userDB, passDB)) {
                 Statement stmt = con.createStatement();
                 ResultSet rs = stmt.executeQuery(comand);
 
@@ -235,8 +223,8 @@ public class Conection {
         int cont = 0;
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
-            try (Connection con = DriverManager.getConnection("jdbc:mysql://" + ipDB + ":3306/hotel?useTimezone=true&serverTimezone=UTC",
-                    userDB, passDB)) {
+            try (Connection con = DriverManager.getConnection("jdbc:mysql://" + ipDB + ":"
+                    + portDB + "/" + nameDB + "?useTimezone=true&serverTimezone=UTC", userDB, passDB)) {
                 Statement stmt = con.createStatement();
                 ResultSet rs = stmt.executeQuery(comand);
 
@@ -263,8 +251,8 @@ public class Conection {
         int cont = 0;
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
-            try (Connection con = DriverManager.getConnection("jdbc:mysql://" + ipDB + ":3306/hotel?useTimezone=true&serverTimezone=UTC",
-                    userDB, passDB)) {
+            try (Connection con = DriverManager.getConnection("jdbc:mysql://" + ipDB + ":"
+                    + portDB + "/" + nameDB + "?useTimezone=true&serverTimezone=UTC", userDB, passDB)) {
                 Statement stmt = con.createStatement();
                 ResultSet rs = stmt.executeQuery(comand);
 
@@ -284,14 +272,13 @@ public class Conection {
         }
         return pgm;
     }
-    
+
     /*método básico para executar comandos(coloque uma barra depois do asterísco a seguir)*
     public void executaComando(String comando) {
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
-            Connection con = DriverManager.getConnection(
-                    "jdbc:mysql://localhost:3306/hotel?useTimezone=true&serverTimezone=UTC",
-                    "root", "1234");
+            Connection con = DriverManager.getConnection("jdbc:mysql://" + ipDB + ":"
+                + portDB + "/" + nameDB + "?useTimezone=true&serverTimezone=UTC", "root", "1234");
             Statement stmt = con.createStatement();
             stmt.execute(comando);
             con.close();
@@ -299,5 +286,4 @@ public class Conection {
             System.out.println(e);
         }
     }/**/
-    
 }

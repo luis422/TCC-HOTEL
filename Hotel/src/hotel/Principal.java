@@ -7,8 +7,12 @@ public class Principal {
 
     public static void main(String[] args) {
 
-        Login l = new Login();l.setVisible(true);
-        //Inicial n = new Inicial("admin", "Administrador");n.setVisible(true);
+        Login l = new Login();
+        l.setAutoRequestFocus(true);
+        l.setFocusable(true);
+        l.requestFocus();
+        l.setVisible(true);
+        //Inicial n = new Inicial("admin", "Administrador");n.setAutoRequestFocus(true);n.setFocusable(true);n.requestFocus();n.setVisible(true);
 
         /*INSERT AUTOMATICO PARA TESTES (put one bar before the asterisch --->)*
         for (int c=1;c<=100;c++){

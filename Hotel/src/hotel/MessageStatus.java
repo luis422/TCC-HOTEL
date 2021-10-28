@@ -49,19 +49,16 @@ public class MessageStatus extends javax.swing.JFrame {
         setName(""); // NOI18N
         setUndecorated(true);
         setSize(new java.awt.Dimension(480, 180));
-        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         msgPanel.setBackground(new java.awt.Color(255, 255, 255));
         msgPanel.setBorder(javax.swing.BorderFactory.createMatteBorder(2, 2, 2, 2, new java.awt.Color(0, 226, 175)));
         msgPanel.setMaximumSize(new java.awt.Dimension(480, 170));
         msgPanel.setMinimumSize(new java.awt.Dimension(480, 170));
-        msgPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         msgPanelTxt.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         msgPanelTxt.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         msgPanelTxt.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgs/icon-ok.png"))); // NOI18N
         msgPanelTxt.setText("Sucesso");
-        msgPanel.add(msgPanelTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(2, 43, 476, -1));
 
         ok.setBackground(new java.awt.Color(0, 226, 175));
         ok.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
@@ -79,9 +76,36 @@ public class MessageStatus extends javax.swing.JFrame {
                 okActionPerformed(evt);
             }
         });
-        msgPanel.add(ok, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 100, 120, 30));
 
-        getContentPane().add(msgPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 480, 170));
+        javax.swing.GroupLayout msgPanelLayout = new javax.swing.GroupLayout(msgPanel);
+        msgPanel.setLayout(msgPanelLayout);
+        msgPanelLayout.setHorizontalGroup(
+            msgPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(msgPanelTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 476, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(msgPanelLayout.createSequentialGroup()
+                .addGap(188, 188, 188)
+                .addComponent(ok, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
+        msgPanelLayout.setVerticalGroup(
+            msgPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(msgPanelLayout.createSequentialGroup()
+                .addGap(41, 41, 41)
+                .addComponent(msgPanelTxt)
+                .addGap(19, 19, 19)
+                .addComponent(ok, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(38, Short.MAX_VALUE))
+        );
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(msgPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(msgPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents

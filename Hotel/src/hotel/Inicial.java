@@ -1,6 +1,8 @@
 package hotel;
 
 import java.awt.Color;
+import java.awt.Dimension;
+import static java.awt.Frame.getFrames;
 import java.awt.Image;
 import java.awt.Toolkit;
 import java.sql.Connection;
@@ -21,6 +23,9 @@ public class Inicial extends javax.swing.JFrame {
     String nome = "Erro";
 
     public Inicial(String user, String nome) {
+        this.setAutoRequestFocus(true);
+        this.setFocusable(true);
+        this.requestFocus();
         initComponentsAntes();
         initComponents();
         saudacao(nome);
@@ -47,10 +52,10 @@ public class Inicial extends javax.swing.JFrame {
                 }
             }
         });
-        ThreadRelogio.start();//começando o thread do relogio
+        ThreadRelogio.start();//iniciando o thread do relogio
     }
 
-    public void saudacao(String nome) {//defini a frase que aparece na tela
+    public void saudacao(String nome) {//define a frase que aparece na tela
         int manhaTardeNoite = Integer.parseInt(new SimpleDateFormat("HH").format(new Date()));
         String frase;
         if (manhaTardeNoite >= 05 && manhaTardeNoite < 12) {//entre 5 da manhã e antes do meio dia
@@ -63,7 +68,7 @@ public class Inicial extends javax.swing.JFrame {
         quadro.setText(frase + nome);
     }
 
-    /*coloque uma barra aqui para retirar o comentário  ---> */
+    /*coloque uma barra depois do asterisco para retirar o comentário  ---> */
     public static boolean isNumeric(String strNum) {
         try {
             double d = Double.parseDouble(strNum);
@@ -72,12 +77,12 @@ public class Inicial extends javax.swing.JFrame {
         }
         return true;
     }/**/
-    
+
     /**
      *
      * @param entradastr
      * @param saidastr
-     * @return 
+     * @return
      */
     public int comparaDatas (String entradastr, String saidastr) {
         SimpleDateFormat data = new SimpleDateFormat("yyyy-MM-dd");
@@ -108,9 +113,9 @@ public class Inicial extends javax.swing.JFrame {
             return 0;// erro inesperado
         }
     }
-    
+
     public void resetCampos() {
-        
+
         //JTable
         DefaultTableModel model = (DefaultTableModel) selectHospedeExcluir.getModel();
         model.setNumRows(0);
@@ -140,9 +145,9 @@ public class Inicial extends javax.swing.JFrame {
         model12.setNumRows(0);
 
 //JLabel
-        
+
     //CADASTRAR
-        
+
         //funcionario
             nomeFuncionarioTxt.setText("");
             rgFuncionarioTxt.setText("");
@@ -176,10 +181,10 @@ public class Inicial extends javax.swing.JFrame {
         //lembrete
             assuntoLemTxt.setText("");
             descLemTxt.setText("");
-        
-        
+
+
     //EXCLUIR
-        
+
         //funcionario
             nomeFuncExcluirTxt.setText("");
             descricaoFuncExcluir.setText("");
@@ -198,10 +203,10 @@ public class Inicial extends javax.swing.JFrame {
         //lembrete
             descLemExcluirTxt.setText("");
             descLemExcluir.setText("");
-        
-        
+
+
     //VER
-        
+
         //funcionario
             nomeFuncVerTxt.setText("");
             descricaoFuncVer.setText("");
@@ -220,10 +225,10 @@ public class Inicial extends javax.swing.JFrame {
         //lembrete
             descLemVerTxt.setText("");
             descLemVer.setText("");
-        
-        
+
+
     //EDITAR
-        
+
         //funcionario
             cpfModFuncTxt.setText("");
             nomeFuncTxtMod.setText("");
@@ -259,59 +264,78 @@ public class Inicial extends javax.swing.JFrame {
             idLemModTxt.setText("");
             assuntoLemModTxt.setText("");
             descLemModTxt.setText("");
-        
-//JComboBox
-        sexoHospedeTxt.setSelectedItem("F");
-        sexoFuncTxtMod.setSelectedItem("F");
-        sexoHospedeTxtMod.setSelectedItem("F");
-        diaNascHospedeTxt.setSelectedItem("01");
-        mesNascHospedeTxt.setSelectedItem("01");
-        anoNascHospedeTxt.setSelectedItem(new SimpleDateFormat("yyyy").format(new Date()));
-        sexoFuncionarioTxt.setSelectedItem("F");
-        estadoResModTxt.setSelectedItem("Reservado");
-        diaNascFuncionarioTxt.setSelectedItem("01");
-        mesNascFuncionarioTxt.setSelectedItem("01");
-        anoNascFuncionarioTxt.setSelectedItem(new SimpleDateFormat("yyyy").format(new Date()));
-        diaConNovoFunc.setSelectedItem(new SimpleDateFormat("dd").format(new Date()));
-        mesConNovoFunc.setSelectedItem(new SimpleDateFormat("MM").format(new Date()));
-        anoConNovoFunc.setSelectedItem(new SimpleDateFormat("yyyy").format(new Date()));
-        cargaHorariaFuncionarioTxt.setSelectedItem("1");
-        cargaHorariaFuncTxtMod.setSelectedItem("1");
-        diaEntradaReserva.setSelectedItem(new SimpleDateFormat("dd").format(new Date()));
-        mesEntradaReserva.setSelectedItem(new SimpleDateFormat("MM").format(new Date()));
-        anoEntradaReserva.setSelectedItem(new SimpleDateFormat("yyyy").format(new Date()));
-        diaSaidaReserva.setSelectedItem(new SimpleDateFormat("dd").format(new Date()));
-        mesSaidaReserva.setSelectedItem(new SimpleDateFormat("MM").format(new Date()));
-        anoSaidaReserva.setSelectedItem(new SimpleDateFormat("yyyy").format(new Date()));
-        diaEntradaReservaMod.setSelectedItem(new SimpleDateFormat("dd").format(new Date()));
-        mesEntradaReservaMod.setSelectedItem(new SimpleDateFormat("MM").format(new Date()));
-        anoEntradaReservaMod.setSelectedItem(new SimpleDateFormat("yyyy").format(new Date()));
-        diaSaidaReservaMod.setSelectedItem(new SimpleDateFormat("dd").format(new Date()));
-        mesSaidaReservaMod.setSelectedItem(new SimpleDateFormat("MM").format(new Date()));
-        anoSaidaReservaMod.setSelectedItem(new SimpleDateFormat("yyyy").format(new Date()));
-        diaPag.setSelectedItem(new SimpleDateFormat("dd").format(new Date()));
-        mesPag.setSelectedItem(new SimpleDateFormat("MM").format(new Date()));
-        anoPag.setSelectedItem(new SimpleDateFormat("yyyy").format(new Date()));
-        diaLem1.setSelectedItem(new SimpleDateFormat("dd").format(new Date()));
-        mesLem1.setSelectedItem(new SimpleDateFormat("MM").format(new Date()));
-        anoLem1.setSelectedItem(new SimpleDateFormat("yyyy").format(new Date()));
-        diaPagMod.setSelectedItem(new SimpleDateFormat("dd").format(new Date()));
-        mesPagMod.setSelectedItem(new SimpleDateFormat("MM").format(new Date()));
-        anoPagMod.setSelectedItem(new SimpleDateFormat("yyyy").format(new Date()));
-        diaLem.setSelectedItem(new SimpleDateFormat("dd").format(new Date()));
-        mesLem.setSelectedItem(new SimpleDateFormat("MM").format(new Date()));
-        anoLem.setSelectedItem(new SimpleDateFormat("yyyy").format(new Date()));
-        disponibilidadeQuartoTxtMod.setSelectedItem("S");
 
-        //JCheckBox
+//JComboBox
+
+    //CADASTRAR
+
+        //funcionario
+            sexoFuncionarioTxt.setSelectedItem("F");
+            diaNascFuncionarioTxt.setSelectedItem("01");
+            mesNascFuncionarioTxt.setSelectedItem("01");
+            anoNascFuncionarioTxt.setSelectedItem(new SimpleDateFormat("yyyy").format(new Date()));
+            cargaHorariaFuncionarioTxt.setSelectedItem("1");
+            diaConNovoFunc.setSelectedItem(new SimpleDateFormat("dd").format(new Date()));
+            mesConNovoFunc.setSelectedItem(new SimpleDateFormat("MM").format(new Date()));
+            anoConNovoFunc.setSelectedItem(new SimpleDateFormat("yyyy").format(new Date()));
+        //hospede
+            sexoHospedeTxt.setSelectedItem("F");
+            diaNascHospedeTxt.setSelectedItem("01");
+            mesNascHospedeTxt.setSelectedItem("01");
+            anoNascHospedeTxt.setSelectedItem(new SimpleDateFormat("yyyy").format(new Date()));
+        //reserva
+            diaEntradaReserva.setSelectedItem(new SimpleDateFormat("dd").format(new Date()));
+            mesEntradaReserva.setSelectedItem(new SimpleDateFormat("MM").format(new Date()));
+            anoEntradaReserva.setSelectedItem(new SimpleDateFormat("yyyy").format(new Date()));
+            diaSaidaReserva.setSelectedItem(new SimpleDateFormat("dd").format(new Date()));
+            mesSaidaReserva.setSelectedItem(new SimpleDateFormat("MM").format(new Date()));
+            anoSaidaReserva.setSelectedItem(new SimpleDateFormat("yyyy").format(new Date()));
+        //pagamento
+            diaPag.setSelectedItem(new SimpleDateFormat("dd").format(new Date()));
+            mesPag.setSelectedItem(new SimpleDateFormat("MM").format(new Date()));
+            anoPag.setSelectedItem(new SimpleDateFormat("yyyy").format(new Date()));
+        //lembrete
+            diaLem.setSelectedItem(new SimpleDateFormat("dd").format(new Date()));
+            mesLem.setSelectedItem(new SimpleDateFormat("MM").format(new Date()));
+            anoLem.setSelectedItem(new SimpleDateFormat("yyyy").format(new Date()));
+
+
+    //MODIFICAÇÃO
+    
+        //funcionario
+            sexoFuncTxtMod.setSelectedItem("F");
+            cargaHorariaFuncTxtMod.setSelectedItem("1");
+        //hospede
+            sexoHospedeTxtMod.setSelectedItem("F");
+        //quarto
+            disponibilidadeQuartoTxtMod.setSelectedItem("S");
+        //reserva
+            estadoResModTxt.setSelectedItem("Reservado");
+            diaEntradaReservaMod.setSelectedItem(new SimpleDateFormat("dd").format(new Date()));
+            mesEntradaReservaMod.setSelectedItem(new SimpleDateFormat("MM").format(new Date()));
+            anoEntradaReservaMod.setSelectedItem(new SimpleDateFormat("yyyy").format(new Date()));
+            diaSaidaReservaMod.setSelectedItem(new SimpleDateFormat("dd").format(new Date()));
+            mesSaidaReservaMod.setSelectedItem(new SimpleDateFormat("MM").format(new Date()));
+            anoSaidaReservaMod.setSelectedItem(new SimpleDateFormat("yyyy").format(new Date()));
+        //pagamento
+            diaPagMod.setSelectedItem(new SimpleDateFormat("dd").format(new Date()));
+            mesPagMod.setSelectedItem(new SimpleDateFormat("MM").format(new Date()));
+            anoPagMod.setSelectedItem(new SimpleDateFormat("yyyy").format(new Date()));
+        //lembrete
+            diaLemMod.setSelectedItem(new SimpleDateFormat("dd").format(new Date()));
+            mesLemMod.setSelectedItem(new SimpleDateFormat("MM").format(new Date()));
+            anoLemMod.setSelectedItem(new SimpleDateFormat("yyyy").format(new Date()));
+
+            
+    //JCheckBox
         excluirReservasHosp.setSelected(false);//JCheckBox para excluir todas as reservas do hóspede
         excluirReservasQua.setSelected(false);//JCheckBox para excluir todas as reservas do quarto
         UserPassNew.setSelected(false);//JCheckBox para cadastrar usuario e senha do funcionario
         UserPassMod.setSelected(false);//JCheckBox para atualizar usuario e senha do funcionario
 
-        /*Aspecto desabilitado por padrão no cadastro e na modificação de usuarios e senhas dos funcionarios
-         *
-         *       Tela de Modificação       */
+/*Aspecto desabilitado por padrão no cadastro e na modificação de usuarios e senhas dos funcionarios
+*
+        *        Tela de Modificação    */
         usuarioFuncTxtMod.setBackground(new Color(230, 230, 230));
         usuarioFuncionarioMod.setForeground(new Color(230, 230, 230));
         usuarioFuncTxtMod.disable();
@@ -524,7 +548,7 @@ public class Inicial extends javax.swing.JFrame {
                         sexoFuncTxtMod.setSelectedItem("Outros");
                         break;
                     default:
-                        System.out.println("Erro selecionar sexo, tela de modificação de funcionários");
+                        JOptionPane.showMessageDialog(null, "Erro selecionar sexo, tela de modificação de funcionários");
                         break;
                 }
                 switch (rs.getInt("cargaHoraria")) {
@@ -565,7 +589,7 @@ public class Inicial extends javax.swing.JFrame {
                         cargaHorariaFuncTxtMod.setSelectedItem("12");
                         break;
                     default:
-                        System.out.println("Erro selecionar sexo, tela de modificação de funcionários");
+                        JOptionPane.showMessageDialog(null, "Erro selecionar sexo, tela de modificação de funcionários");
                         MessageStatus m = new MessageStatus(usuario, nome, "Erro ao selecionar sexo do funcionário.", "erro");
                         m.setLocationRelativeTo(null);
                         m.setVisible(true);
@@ -609,7 +633,7 @@ public class Inicial extends javax.swing.JFrame {
                         sexoHospedeTxtMod.setSelectedItem("Outros");
                         break;
                     default:
-                        System.out.println("Erro selecionar sexo, tela de modificação de hóspedes");
+                        JOptionPane.showMessageDialog(null, "Erro selecionar sexo, tela de modificação de hóspedes");
                         break;
                 }
                 telefoneHospedeTxtMod.setText(rs.getString("telefone"));
@@ -695,9 +719,9 @@ public class Inicial extends javax.swing.JFrame {
             while (rs.next()) {
                 assuntoLemModTxt.setText(rs.getString("assunto"));
                 descLemModTxt.setText(rs.getString("descricao"));
-                diaLem1.setSelectedItem(new SimpleDateFormat("dd").format(rs.getDate("data")));
-                mesLem1.setSelectedItem(new SimpleDateFormat("MM").format(rs.getDate("data")));
-                anoLem1.setSelectedItem(new SimpleDateFormat("yyyy").format(rs.getDate("data")));
+                diaLemMod.setSelectedItem(new SimpleDateFormat("dd").format(rs.getDate("data")));
+                mesLemMod.setSelectedItem(new SimpleDateFormat("MM").format(rs.getDate("data")));
+                anoLemMod.setSelectedItem(new SimpleDateFormat("yyyy").format(rs.getDate("data")));
             }
             con.close();
         } catch (ClassNotFoundException | SQLException e) {
@@ -808,7 +832,7 @@ public class Inicial extends javax.swing.JFrame {
             }
             con.close();
         } catch (SQLException ex) {
-            System.out.println("selectHospJTable,o erro foi " + ex);
+            JOptionPane.showMessageDialog(null, "selectHospJTable,o erro foi " + ex);
             MessageStatus m = new MessageStatus(usuario, nome, "Erro inesperado ao selecionar hóspede.", "erro");
             m.setLocationRelativeTo(null);
             m.setVisible(true);
@@ -862,7 +886,7 @@ public class Inicial extends javax.swing.JFrame {
             }
             con.close();
         } catch (SQLException ex) {
-            System.out.println("selectFuncJTable,o erro foi " + ex);
+            JOptionPane.showMessageDialog(null, "selectFuncJTable,o erro foi " + ex);
             MessageStatus m = new MessageStatus(usuario, nome, "Erro inesperado ao selecionar funcionário.", "erro");
             m.setLocationRelativeTo(null);
             m.setVisible(true);
@@ -900,7 +924,7 @@ public class Inicial extends javax.swing.JFrame {
             }
             con.close();
         } catch (SQLException ex) {
-            System.out.println("selectPagJTable,o erro foi " + ex);
+            JOptionPane.showMessageDialog(null, "selectPagJTable,o erro foi " + ex);
             MessageStatus m = new MessageStatus(usuario, nome, "Erro inesperado ao selecionar pagamento.", "erro");
             m.setLocationRelativeTo(null);
             m.setVisible(true);
@@ -939,7 +963,7 @@ public class Inicial extends javax.swing.JFrame {
             }
             con.close();
         } catch (SQLException ex) {
-            System.out.println("selectLemJTable,o erro foi " + ex);
+            JOptionPane.showMessageDialog(null, "selectLemJTable,o erro foi " + ex);
             MessageStatus m = new MessageStatus(usuario, nome, "Erro inesperado ao selecionar lembrete.", "erro");
             m.setLocationRelativeTo(null);
             m.setVisible(true);
@@ -989,7 +1013,7 @@ public class Inicial extends javax.swing.JFrame {
             }
             con.close();
         } catch (SQLException ex) {
-            System.out.println("selectQuaJTable,o erro foi " + ex);
+            JOptionPane.showMessageDialog(null, "selectQuaJTable,o erro foi " + ex);
             MessageStatus m = new MessageStatus(usuario, nome, "Erro inesperado ao selecionar quarto.", "erro");
             m.setLocationRelativeTo(null);
             m.setVisible(true);
@@ -1032,7 +1056,7 @@ public class Inicial extends javax.swing.JFrame {
             }
             con.close();
         } catch (SQLException ex) {
-            System.out.println("selectResJTable,o erro foi " + ex);
+            JOptionPane.showMessageDialog(null, "selectResJTable,o erro foi " + ex);
             MessageStatus m = new MessageStatus(usuario, nome, "Erro inesperado ao selecionar reserva.", "erro");
             m.setLocationRelativeTo(null);
             m.setVisible(true);
@@ -1518,9 +1542,9 @@ public class Inicial extends javax.swing.JFrame {
         modLem = new javax.swing.JLabel();
         descLemMod = new javax.swing.JLabel();
         dataLemMod = new javax.swing.JLabel();
-        diaLem1 = new javax.swing.JComboBox<>();
-        mesLem1 = new javax.swing.JComboBox<>();
-        anoLem1 = new javax.swing.JComboBox<>();
+        diaLemMod = new javax.swing.JComboBox<>();
+        mesLemMod = new javax.swing.JComboBox<>();
+        anoLemMod = new javax.swing.JComboBox<>();
         cadastrarLemBtn1 = new javax.swing.JButton();
         erroLem1 = new javax.swing.JLabel();
         idLemMod = new javax.swing.JLabel();
@@ -1572,7 +1596,7 @@ public class Inicial extends javax.swing.JFrame {
         PanelTopo.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         sairTxt.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgs/icon-sair.png"))); // NOI18N
-        sairTxt.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        sairTxt.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         sairTxt.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 sairTxtMouseClicked(evt);
@@ -1587,7 +1611,7 @@ public class Inicial extends javax.swing.JFrame {
         PanelTopo.add(sairTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(916, 16, -1, 10));
 
         minimizarTxt.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgs/icon-minimizar.png"))); // NOI18N
-        minimizarTxt.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        minimizarTxt.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         minimizarTxt.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 minimizarTxtMouseClicked(evt);
@@ -1602,7 +1626,7 @@ public class Inicial extends javax.swing.JFrame {
 
         inicioBtn.setBackground(new java.awt.Color(0, 19, 39));
         inicioBtn.setToolTipText("");
-        inicioBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        inicioBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         inicioBtn.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 inicioBtnMousePressed(evt);
@@ -1623,7 +1647,7 @@ public class Inicial extends javax.swing.JFrame {
 
         funcionarioBtn.setBackground(new java.awt.Color(0, 73, 147));
         funcionarioBtn.setToolTipText("");
-        funcionarioBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        funcionarioBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         funcionarioBtn.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 funcionarioBtnMousePressed(evt);
@@ -1644,7 +1668,7 @@ public class Inicial extends javax.swing.JFrame {
 
         hospedeBtn.setBackground(new java.awt.Color(0, 73, 147));
         hospedeBtn.setToolTipText("");
-        hospedeBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        hospedeBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         hospedeBtn.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 hospedeBtnMousePressed(evt);
@@ -1665,7 +1689,7 @@ public class Inicial extends javax.swing.JFrame {
 
         quartoBtn.setBackground(new java.awt.Color(0, 73, 147));
         quartoBtn.setToolTipText("");
-        quartoBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        quartoBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         quartoBtn.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 quartoBtnMousePressed(evt);
@@ -1686,7 +1710,7 @@ public class Inicial extends javax.swing.JFrame {
 
         reservaBtn.setBackground(new java.awt.Color(0, 73, 147));
         reservaBtn.setToolTipText("");
-        reservaBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        reservaBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         reservaBtn.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 reservaBtnMousePressed(evt);
@@ -1707,7 +1731,7 @@ public class Inicial extends javax.swing.JFrame {
 
         pagamentoBtn.setBackground(new java.awt.Color(0, 73, 147));
         pagamentoBtn.setToolTipText("");
-        pagamentoBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        pagamentoBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         pagamentoBtn.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 pagamentoBtnMousePressed(evt);
@@ -1728,7 +1752,7 @@ public class Inicial extends javax.swing.JFrame {
 
         lembreteBtn.setBackground(new java.awt.Color(0, 73, 147));
         lembreteBtn.setToolTipText("");
-        lembreteBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lembreteBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         lembreteBtn.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 lembreteBtnMousePressed(evt);
@@ -1795,7 +1819,7 @@ public class Inicial extends javax.swing.JFrame {
 
         cadastrarLemFuncaoBtn.setBackground(new java.awt.Color(0, 179, 136));
         cadastrarLemFuncaoBtn.setToolTipText("");
-        cadastrarLemFuncaoBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        cadastrarLemFuncaoBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         cadastrarLemFuncaoBtn.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 cadastrarLemFuncaoBtnMousePressed(evt);
@@ -1819,7 +1843,7 @@ public class Inicial extends javax.swing.JFrame {
 
         cadastrarResFuncaoBtn.setBackground(new java.awt.Color(0, 179, 136));
         cadastrarResFuncaoBtn.setToolTipText("");
-        cadastrarResFuncaoBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        cadastrarResFuncaoBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         cadastrarResFuncaoBtn.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 cadastrarResFuncaoBtnMousePressed(evt);
@@ -1843,7 +1867,7 @@ public class Inicial extends javax.swing.JFrame {
 
         cadastrarHospFuncaoBtn.setBackground(new java.awt.Color(0, 179, 136));
         cadastrarHospFuncaoBtn.setToolTipText("");
-        cadastrarHospFuncaoBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        cadastrarHospFuncaoBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         cadastrarHospFuncaoBtn.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 cadastrarHospFuncaoBtnMousePressed(evt);
@@ -1867,7 +1891,7 @@ public class Inicial extends javax.swing.JFrame {
 
         cadastrarPagFuncaoBtn.setBackground(new java.awt.Color(0, 179, 136));
         cadastrarPagFuncaoBtn.setToolTipText("");
-        cadastrarPagFuncaoBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        cadastrarPagFuncaoBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         cadastrarPagFuncaoBtn.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 cadastrarPagFuncaoBtnMousePressed(evt);
@@ -1891,7 +1915,7 @@ public class Inicial extends javax.swing.JFrame {
 
         cadastrarQuaFuncaoBtn.setBackground(new java.awt.Color(0, 179, 136));
         cadastrarQuaFuncaoBtn.setToolTipText("");
-        cadastrarQuaFuncaoBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        cadastrarQuaFuncaoBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         cadastrarQuaFuncaoBtn.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 cadastrarQuaFuncaoBtnMousePressed(evt);
@@ -1915,7 +1939,7 @@ public class Inicial extends javax.swing.JFrame {
 
         cadastrarFuncFuncaoBtn.setBackground(new java.awt.Color(0, 179, 136));
         cadastrarFuncFuncaoBtn.setToolTipText("");
-        cadastrarFuncFuncaoBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        cadastrarFuncFuncaoBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         cadastrarFuncFuncaoBtn.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 cadastrarFuncFuncaoBtnMousePressed(evt);
@@ -1939,7 +1963,7 @@ public class Inicial extends javax.swing.JFrame {
 
         excluirLemFuncaoBtn.setBackground(new java.awt.Color(226, 0, 0));
         excluirLemFuncaoBtn.setToolTipText("");
-        excluirLemFuncaoBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        excluirLemFuncaoBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         excluirLemFuncaoBtn.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 excluirLemFuncaoBtnMousePressed(evt);
@@ -1963,7 +1987,7 @@ public class Inicial extends javax.swing.JFrame {
 
         excluirResFuncaoBtn.setBackground(new java.awt.Color(226, 0, 0));
         excluirResFuncaoBtn.setToolTipText("");
-        excluirResFuncaoBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        excluirResFuncaoBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         excluirResFuncaoBtn.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 excluirResFuncaoBtnMousePressed(evt);
@@ -1987,7 +2011,7 @@ public class Inicial extends javax.swing.JFrame {
 
         excluirQuaFuncaoBtn.setBackground(new java.awt.Color(226, 0, 0));
         excluirQuaFuncaoBtn.setToolTipText("");
-        excluirQuaFuncaoBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        excluirQuaFuncaoBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         excluirQuaFuncaoBtn.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 excluirQuaFuncaoBtnMousePressed(evt);
@@ -2011,7 +2035,7 @@ public class Inicial extends javax.swing.JFrame {
 
         excluirHospFuncaoBtn.setBackground(new java.awt.Color(226, 0, 0));
         excluirHospFuncaoBtn.setToolTipText("");
-        excluirHospFuncaoBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        excluirHospFuncaoBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         excluirHospFuncaoBtn.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 excluirHospFuncaoBtnMousePressed(evt);
@@ -2035,7 +2059,7 @@ public class Inicial extends javax.swing.JFrame {
 
         excluirFuncFuncaoBtn.setBackground(new java.awt.Color(226, 0, 0));
         excluirFuncFuncaoBtn.setToolTipText("");
-        excluirFuncFuncaoBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        excluirFuncFuncaoBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         excluirFuncFuncaoBtn.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 excluirFuncFuncaoBtnMousePressed(evt);
@@ -2059,7 +2083,7 @@ public class Inicial extends javax.swing.JFrame {
 
         excluirPagFuncaoBtn.setBackground(new java.awt.Color(226, 0, 0));
         excluirPagFuncaoBtn.setToolTipText("");
-        excluirPagFuncaoBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        excluirPagFuncaoBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         excluirPagFuncaoBtn.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 excluirPagFuncaoBtnMousePressed(evt);
@@ -2083,7 +2107,7 @@ public class Inicial extends javax.swing.JFrame {
 
         verResFuncaoBtn.setBackground(new java.awt.Color(226, 128, 0));
         verResFuncaoBtn.setToolTipText("");
-        verResFuncaoBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        verResFuncaoBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         verResFuncaoBtn.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 verResFuncaoBtnMousePressed(evt);
@@ -2107,7 +2131,7 @@ public class Inicial extends javax.swing.JFrame {
 
         verHospFuncaoBtn.setBackground(new java.awt.Color(226, 128, 0));
         verHospFuncaoBtn.setToolTipText("");
-        verHospFuncaoBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        verHospFuncaoBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         verHospFuncaoBtn.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 verHospFuncaoBtnMousePressed(evt);
@@ -2131,7 +2155,7 @@ public class Inicial extends javax.swing.JFrame {
 
         verFuncFuncaoBtn.setBackground(new java.awt.Color(226, 128, 0));
         verFuncFuncaoBtn.setToolTipText("");
-        verFuncFuncaoBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        verFuncFuncaoBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         verFuncFuncaoBtn.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 verFuncFuncaoBtnMousePressed(evt);
@@ -2155,7 +2179,7 @@ public class Inicial extends javax.swing.JFrame {
 
         verQuaFuncaoBtn.setBackground(new java.awt.Color(226, 128, 0));
         verQuaFuncaoBtn.setToolTipText("");
-        verQuaFuncaoBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        verQuaFuncaoBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         verQuaFuncaoBtn.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 verQuaFuncaoBtnMousePressed(evt);
@@ -2179,7 +2203,7 @@ public class Inicial extends javax.swing.JFrame {
 
         verLemFuncaoBtn.setBackground(new java.awt.Color(226, 128, 0));
         verLemFuncaoBtn.setToolTipText("");
-        verLemFuncaoBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        verLemFuncaoBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         verLemFuncaoBtn.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 verLemFuncaoBtnMousePressed(evt);
@@ -2203,7 +2227,7 @@ public class Inicial extends javax.swing.JFrame {
 
         verPagFuncaoBtn.setBackground(new java.awt.Color(226, 128, 0));
         verPagFuncaoBtn.setToolTipText("");
-        verPagFuncaoBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        verPagFuncaoBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         verPagFuncaoBtn.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 verPagFuncaoBtnMousePressed(evt);
@@ -2227,7 +2251,7 @@ public class Inicial extends javax.swing.JFrame {
 
         modResFuncaoBtn.setBackground(new java.awt.Color(171, 71, 255));
         modResFuncaoBtn.setToolTipText("");
-        modResFuncaoBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        modResFuncaoBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         modResFuncaoBtn.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 modResFuncaoBtnMousePressed(evt);
@@ -2251,7 +2275,7 @@ public class Inicial extends javax.swing.JFrame {
 
         modHospFuncaoBtn.setBackground(new java.awt.Color(140, 0, 240));
         modHospFuncaoBtn.setToolTipText("");
-        modHospFuncaoBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        modHospFuncaoBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         modHospFuncaoBtn.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 modHospFuncaoBtnMousePressed(evt);
@@ -2275,7 +2299,7 @@ public class Inicial extends javax.swing.JFrame {
 
         modFuncFuncaoBtn.setBackground(new java.awt.Color(140, 0, 240));
         modFuncFuncaoBtn.setToolTipText("");
-        modFuncFuncaoBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        modFuncFuncaoBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         modFuncFuncaoBtn.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 modFuncFuncaoBtnMousePressed(evt);
@@ -2299,7 +2323,7 @@ public class Inicial extends javax.swing.JFrame {
 
         modQuaFuncaoBtn.setBackground(new java.awt.Color(140, 0, 240));
         modQuaFuncaoBtn.setToolTipText("");
-        modQuaFuncaoBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        modQuaFuncaoBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         modQuaFuncaoBtn.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 modQuaFuncaoBtnMousePressed(evt);
@@ -2323,7 +2347,7 @@ public class Inicial extends javax.swing.JFrame {
 
         modLemFuncaoBtn.setBackground(new java.awt.Color(140, 0, 240));
         modLemFuncaoBtn.setToolTipText("");
-        modLemFuncaoBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        modLemFuncaoBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         modLemFuncaoBtn.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 modLemFuncaoBtnMousePressed(evt);
@@ -2347,7 +2371,7 @@ public class Inicial extends javax.swing.JFrame {
 
         modPagFuncaoBtn.setBackground(new java.awt.Color(140, 0, 240));
         modPagFuncaoBtn.setToolTipText("");
-        modPagFuncaoBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        modPagFuncaoBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         modPagFuncaoBtn.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 modPagFuncaoBtnMousePressed(evt);
@@ -2443,7 +2467,7 @@ public class Inicial extends javax.swing.JFrame {
         sexoFuncionarioTxt.setForeground(new java.awt.Color(255, 255, 255));
         sexoFuncionarioTxt.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "F", "M", "Outros" }));
         sexoFuncionarioTxt.setBorder(null);
-        sexoFuncionarioTxt.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        sexoFuncionarioTxt.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         sexoFuncionarioTxt.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 sexoFuncionarioTxtKeyPressed(evt);
@@ -2460,8 +2484,8 @@ public class Inicial extends javax.swing.JFrame {
         anoNascFuncionarioTxt.setBackground(new java.awt.Color(0, 179, 136));
         anoNascFuncionarioTxt.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         anoNascFuncionarioTxt.setForeground(new java.awt.Color(255, 255, 255));
-        anoNascFuncionarioTxt.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "2019", "2018", "2017", "2016", "2015", "2014", "2013", "2012", "2011", "2010", "2009", "2008", "2007", "2006", "2005", "2004", "2003", "2002", "2001", "2000", "1999", "1998", "1997", "1996", "1995", "1994", "1993", "1992", "1991", "1990", "1989", "1988", "1987", "1986", "1985", "1984", "1983", "1982", "1981", "1980", "1979", "1978", "1977", "1976", "1975", "1974", "1973", "1972", "1971", "1970", "1969", "1968", "1967", "1966", "1965", "1964", "1963", "1962", "1961", "1960", "1959", "1958", "1957", "1956", "1955", "1954", "1953", "1952", "1951", "1950", "1949", "1948", "1947", "1946", "1945", "1944", "1943", "1942", "1941", "1940", "1939", "1938", "1937", "1936", "1935", "1934", "1933", "1932", "1931", "1930", "1929", "1928", "1927", "1926", "1925", "1924", "1923", "1922", "1921", "1920", "1919", "1918", "1917", "1916", "1915", "1914", "1913", "1912", "1911", "1910", "1909", "1908", "1907", "1906", "1905", "1904", "1903", "1902", "1901", "1900" }));
-        anoNascFuncionarioTxt.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        anoNascFuncionarioTxt.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "2100", "2099", "2098", "2097", "2096", "2095", "2094", "2093", "2092", "2091", "2090", "2089", "2088", "2087", "2086", "2085", "2084", "2083", "2082", "2081", "2080", "2079", "2078", "2077", "2076", "2075", "2074", "2073", "2072", "2071", "2070", "2069", "2068", "2067", "2066", "2065", "2064", "2063", "2062", "2061", "2060", "2059", "2058", "2057", "2056", "2055", "2054", "2053", "2052", "2051", "2050", "2049", "2048", "2047", "2046", "2045", "2044", "2043", "2042", "2041", "2040", "2039", "2038", "2037", "2036", "2035", "2034", "2033", "2032", "2031", "2030", "2029", "2028", "2027", "2026", "2025", "2024", "2023", "2022", "2021", "2020", "2019", "2018", "2017", "2016", "2015", "2014", "2013", "2012", "2011", "2010", "2009", "2008", "2007", "2006", "2005", "2004", "2003", "2002", "2001", "2000" }));
+        anoNascFuncionarioTxt.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         anoNascFuncionarioTxt.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 anoNascFuncionarioTxtKeyPressed(evt);
@@ -2473,7 +2497,7 @@ public class Inicial extends javax.swing.JFrame {
         diaNascFuncionarioTxt.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         diaNascFuncionarioTxt.setForeground(new java.awt.Color(255, 255, 255));
         diaNascFuncionarioTxt.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31" }));
-        diaNascFuncionarioTxt.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        diaNascFuncionarioTxt.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         diaNascFuncionarioTxt.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 diaNascFuncionarioTxtKeyPressed(evt);
@@ -2485,7 +2509,7 @@ public class Inicial extends javax.swing.JFrame {
         mesNascFuncionarioTxt.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         mesNascFuncionarioTxt.setForeground(new java.awt.Color(255, 255, 255));
         mesNascFuncionarioTxt.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12" }));
-        mesNascFuncionarioTxt.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        mesNascFuncionarioTxt.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         mesNascFuncionarioTxt.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 mesNascFuncionarioTxtKeyPressed(evt);
@@ -2583,7 +2607,7 @@ public class Inicial extends javax.swing.JFrame {
         diaConNovoFunc.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         diaConNovoFunc.setForeground(new java.awt.Color(255, 255, 255));
         diaConNovoFunc.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31" }));
-        diaConNovoFunc.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        diaConNovoFunc.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         diaConNovoFunc.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 diaConNovoFuncKeyPressed(evt);
@@ -2595,7 +2619,7 @@ public class Inicial extends javax.swing.JFrame {
         mesConNovoFunc.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         mesConNovoFunc.setForeground(new java.awt.Color(255, 255, 255));
         mesConNovoFunc.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12" }));
-        mesConNovoFunc.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        mesConNovoFunc.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         mesConNovoFunc.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 mesConNovoFuncKeyPressed(evt);
@@ -2606,8 +2630,8 @@ public class Inicial extends javax.swing.JFrame {
         anoConNovoFunc.setBackground(new java.awt.Color(0, 179, 136));
         anoConNovoFunc.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         anoConNovoFunc.setForeground(new java.awt.Color(255, 255, 255));
-        anoConNovoFunc.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "2019", "2018", "2017", "2016", "2015", "2014", "2013", "2012", "2011", "2010", "2009", "2008", "2007", "2006", "2005", "2004", "2003", "2002", "2001", "2000", "1999", "1998", "1997", "1996", "1995", "1994", "1993", "1992", "1991", "1990", "1989", "1988", "1987", "1986", "1985", "1984", "1983", "1982", "1981", "1980", "1979", "1978", "1977", "1976", "1975", "1974", "1973", "1972", "1971", "1970", "1969", "1968", "1967", "1966", "1965", "1964", "1963", "1962", "1961", "1960", "1959", "1958", "1957", "1956", "1955", "1954", "1953", "1952", "1951", "1950", "1949", "1948", "1947", "1946", "1945", "1944", "1943", "1942", "1941", "1940", "1939", "1938", "1937", "1936", "1935", "1934", "1933", "1932", "1931", "1930", "1929", "1928", "1927", "1926", "1925", "1924", "1923", "1922", "1921", "1920", "1919", "1918", "1917", "1916", "1915", "1914", "1913", "1912", "1911", "1910", "1909", "1908", "1907", "1906", "1905", "1904", "1903", "1902", "1901", "1900" }));
-        anoConNovoFunc.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        anoConNovoFunc.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "2100", "2099", "2098", "2097", "2096", "2095", "2094", "2093", "2092", "2091", "2090", "2089", "2088", "2087", "2086", "2085", "2084", "2083", "2082", "2081", "2080", "2079", "2078", "2077", "2076", "2075", "2074", "2073", "2072", "2071", "2070", "2069", "2068", "2067", "2066", "2065", "2064", "2063", "2062", "2061", "2060", "2059", "2058", "2057", "2056", "2055", "2054", "2053", "2052", "2051", "2050", "2049", "2048", "2047", "2046", "2045", "2044", "2043", "2042", "2041", "2040", "2039", "2038", "2037", "2036", "2035", "2034", "2033", "2032", "2031", "2030", "2029", "2028", "2027", "2026", "2025", "2024", "2023", "2022", "2021", "2020", "2019", "2018", "2017", "2016", "2015", "2014", "2013", "2012", "2011", "2010", "2009", "2008", "2007", "2006", "2005", "2004", "2003", "2002", "2001", "2000" }));
+        anoConNovoFunc.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         anoConNovoFunc.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 anoConNovoFuncKeyPressed(evt);
@@ -2625,7 +2649,7 @@ public class Inicial extends javax.swing.JFrame {
         cargaHorariaFuncionarioTxt.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         cargaHorariaFuncionarioTxt.setForeground(new java.awt.Color(255, 255, 255));
         cargaHorariaFuncionarioTxt.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12" }));
-        cargaHorariaFuncionarioTxt.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        cargaHorariaFuncionarioTxt.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         cargaHorariaFuncionarioTxt.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 cargaHorariaFuncionarioTxtKeyPressed(evt);
@@ -2726,7 +2750,7 @@ public class Inicial extends javax.swing.JFrame {
         cadastrarFuncionarioBtn.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         cadastrarFuncionarioBtn.setForeground(new java.awt.Color(255, 255, 255));
         cadastrarFuncionarioBtn.setText("Cadastrar");
-        cadastrarFuncionarioBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        cadastrarFuncionarioBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         cadastrarFuncionarioBtn.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 cadastrarFuncionarioBtnMouseClicked(evt);
@@ -2816,7 +2840,7 @@ public class Inicial extends javax.swing.JFrame {
         excluirFuncBtn.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         excluirFuncBtn.setForeground(new java.awt.Color(255, 255, 255));
         excluirFuncBtn.setText("Excluir");
-        excluirFuncBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        excluirFuncBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         excluirFuncBtn.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 excluirFuncBtnMouseClicked(evt);
@@ -2954,7 +2978,7 @@ public class Inicial extends javax.swing.JFrame {
         sexoFuncTxtMod.setForeground(new java.awt.Color(255, 255, 255));
         sexoFuncTxtMod.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "F", "M", "Outros" }));
         sexoFuncTxtMod.setBorder(null);
-        sexoFuncTxtMod.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        sexoFuncTxtMod.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         sexoFuncTxtMod.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 sexoFuncTxtModKeyPressed(evt);
@@ -3012,7 +3036,7 @@ public class Inicial extends javax.swing.JFrame {
         cargaHorariaFuncTxtMod.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         cargaHorariaFuncTxtMod.setForeground(new java.awt.Color(255, 255, 255));
         cargaHorariaFuncTxtMod.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12" }));
-        cargaHorariaFuncTxtMod.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        cargaHorariaFuncTxtMod.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         cargaHorariaFuncTxtMod.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 cargaHorariaFuncTxtModKeyPressed(evt);
@@ -3109,7 +3133,7 @@ public class Inicial extends javax.swing.JFrame {
         modificarFuncionarioBtn.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         modificarFuncionarioBtn.setForeground(new java.awt.Color(255, 255, 255));
         modificarFuncionarioBtn.setText("Modificar");
-        modificarFuncionarioBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        modificarFuncionarioBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         modificarFuncionarioBtn.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 modificarFuncionarioBtnMouseClicked(evt);
@@ -3183,7 +3207,7 @@ public class Inicial extends javax.swing.JFrame {
         sexoHospedeTxt.setForeground(new java.awt.Color(255, 255, 255));
         sexoHospedeTxt.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "F", "M", "Outros" }));
         sexoHospedeTxt.setBorder(new javax.swing.border.MatteBorder(null));
-        sexoHospedeTxt.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        sexoHospedeTxt.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         sexoHospedeTxt.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 sexoHospedeTxtKeyPressed(evt);
@@ -3207,7 +3231,7 @@ public class Inicial extends javax.swing.JFrame {
         diaNascHospedeTxt.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         diaNascHospedeTxt.setForeground(new java.awt.Color(255, 255, 255));
         diaNascHospedeTxt.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31" }));
-        diaNascHospedeTxt.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        diaNascHospedeTxt.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         diaNascHospedeTxt.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 diaNascHospedeTxtKeyPressed(evt);
@@ -3219,7 +3243,7 @@ public class Inicial extends javax.swing.JFrame {
         mesNascHospedeTxt.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         mesNascHospedeTxt.setForeground(new java.awt.Color(255, 255, 255));
         mesNascHospedeTxt.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12" }));
-        mesNascHospedeTxt.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        mesNascHospedeTxt.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         mesNascHospedeTxt.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 mesNascHospedeTxtKeyPressed(evt);
@@ -3230,8 +3254,8 @@ public class Inicial extends javax.swing.JFrame {
         anoNascHospedeTxt.setBackground(new java.awt.Color(0, 179, 136));
         anoNascHospedeTxt.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         anoNascHospedeTxt.setForeground(new java.awt.Color(255, 255, 255));
-        anoNascHospedeTxt.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "2019", "2018", "2017", "2016", "2015", "2014", "2013", "2012", "2011", "2010", "2009", "2008", "2007", "2006", "2005", "2004", "2003", "2002", "2001", "2000", "1999", "1998", "1997", "1996", "1995", "1994", "1993", "1992", "1991", "1990", "1989", "1988", "1987", "1986", "1985", "1984", "1983", "1982", "1981", "1980", "1979", "1978", "1977", "1976", "1975", "1974", "1973", "1972", "1971", "1970", "1969", "1968", "1967", "1966", "1965", "1964", "1963", "1962", "1961", "1960", "1959", "1958", "1957", "1956", "1955", "1954", "1953", "1952", "1951", "1950", "1949", "1948", "1947", "1946", "1945", "1944", "1943", "1942", "1941", "1940", "1939", "1938", "1937", "1936", "1935", "1934", "1933", "1932", "1931", "1930", "1929", "1928", "1927", "1926", "1925", "1924", "1923", "1922", "1921", "1920", "1919", "1918", "1917", "1916", "1915", "1914", "1913", "1912", "1911", "1910", "1909", "1908", "1907", "1906", "1905", "1904", "1903", "1902", "1901", "1900" }));
-        anoNascHospedeTxt.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        anoNascHospedeTxt.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "2100", "2099", "2098", "2097", "2096", "2095", "2094", "2093", "2092", "2091", "2090", "2089", "2088", "2087", "2086", "2085", "2084", "2083", "2082", "2081", "2080", "2079", "2078", "2077", "2076", "2075", "2074", "2073", "2072", "2071", "2070", "2069", "2068", "2067", "2066", "2065", "2064", "2063", "2062", "2061", "2060", "2059", "2058", "2057", "2056", "2055", "2054", "2053", "2052", "2051", "2050", "2049", "2048", "2047", "2046", "2045", "2044", "2043", "2042", "2041", "2040", "2039", "2038", "2037", "2036", "2035", "2034", "2033", "2032", "2031", "2030", "2029", "2028", "2027", "2026", "2025", "2024", "2023", "2022", "2021", "2020", "2019", "2018", "2017", "2016", "2015", "2014", "2013", "2012", "2011", "2010", "2009", "2008", "2007", "2006", "2005", "2004", "2003", "2002", "2001", "2000" }));
+        anoNascHospedeTxt.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         anoNascHospedeTxt.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 anoNascHospedeTxtKeyPressed(evt);
@@ -3303,7 +3327,7 @@ public class Inicial extends javax.swing.JFrame {
         cadastrarHospedeBtn.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         cadastrarHospedeBtn.setForeground(new java.awt.Color(255, 255, 255));
         cadastrarHospedeBtn.setText("Cadastrar");
-        cadastrarHospedeBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        cadastrarHospedeBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         cadastrarHospedeBtn.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 cadastrarHospedeBtnMouseClicked(evt);
@@ -3339,7 +3363,7 @@ public class Inicial extends javax.swing.JFrame {
         panelHospede.add(cadastrarHospede, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 710, 500));
 
         excluirHospede.setBackground(new java.awt.Color(255, 255, 255));
-        excluirHospede.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        excluirHospede.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         excluirHospede.setMaximumSize(new java.awt.Dimension(710, 500));
         excluirHospede.setMinimumSize(new java.awt.Dimension(710, 500));
         excluirHospede.setPreferredSize(new java.awt.Dimension(710, 500));
@@ -3555,7 +3579,7 @@ public class Inicial extends javax.swing.JFrame {
         sexoHospedeTxtMod.setForeground(new java.awt.Color(255, 255, 255));
         sexoHospedeTxtMod.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "F", "M", "Outros" }));
         sexoHospedeTxtMod.setBorder(new javax.swing.border.MatteBorder(null));
-        sexoHospedeTxtMod.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        sexoHospedeTxtMod.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         sexoHospedeTxtMod.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 sexoHospedeTxtModKeyPressed(evt);
@@ -3612,7 +3636,7 @@ public class Inicial extends javax.swing.JFrame {
         modificarHospedeBtn.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         modificarHospedeBtn.setForeground(new java.awt.Color(255, 255, 255));
         modificarHospedeBtn.setText("Modificar");
-        modificarHospedeBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        modificarHospedeBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         modificarHospedeBtn.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 modificarHospedeBtnMouseClicked(evt);
@@ -3757,7 +3781,7 @@ public class Inicial extends javax.swing.JFrame {
         cadastrarQuartoBtn.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         cadastrarQuartoBtn.setForeground(new java.awt.Color(255, 255, 255));
         cadastrarQuartoBtn.setText("Cadastrar");
-        cadastrarQuartoBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        cadastrarQuartoBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         cadastrarQuartoBtn.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 cadastrarQuartoBtnMouseClicked(evt);
@@ -3862,7 +3886,7 @@ public class Inicial extends javax.swing.JFrame {
         excluirQuaBtn.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         excluirQuaBtn.setForeground(new java.awt.Color(255, 255, 255));
         excluirQuaBtn.setText("Excluir");
-        excluirQuaBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        excluirQuaBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         excluirQuaBtn.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 excluirQuaBtnMouseClicked(evt);
@@ -4082,7 +4106,7 @@ public class Inicial extends javax.swing.JFrame {
         modificarQuartoBtn.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         modificarQuartoBtn.setForeground(new java.awt.Color(255, 255, 255));
         modificarQuartoBtn.setText("Modificar");
-        modificarQuartoBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        modificarQuartoBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         modificarQuartoBtn.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 modificarQuartoBtnMouseClicked(evt);
@@ -4187,7 +4211,7 @@ public class Inicial extends javax.swing.JFrame {
         mesEntradaReserva.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         mesEntradaReserva.setForeground(new java.awt.Color(255, 255, 255));
         mesEntradaReserva.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12" }));
-        mesEntradaReserva.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        mesEntradaReserva.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         mesEntradaReserva.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 mesEntradaReservaKeyPressed(evt);
@@ -4198,8 +4222,8 @@ public class Inicial extends javax.swing.JFrame {
         anoEntradaReserva.setBackground(new java.awt.Color(0, 179, 136));
         anoEntradaReserva.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         anoEntradaReserva.setForeground(new java.awt.Color(255, 255, 255));
-        anoEntradaReserva.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "2019", "2018", "2017", "2016", "2015", "2014", "2013", "2012", "2011", "2010", "2009", "2008", "2007", "2006", "2005", "2004", "2003", "2002", "2001", "2000", "1999", "1998", "1997", "1996", "1995", "1994", "1993", "1992", "1991", "1990", "1989", "1988", "1987", "1986", "1985", "1984", "1983", "1982", "1981", "1980", "1979", "1978", "1977", "1976", "1975", "1974", "1973", "1972", "1971", "1970", "1969", "1968", "1967", "1966", "1965", "1964", "1963", "1962", "1961", "1960", "1959", "1958", "1957", "1956", "1955", "1954", "1953", "1952", "1951", "1950", "1949", "1948", "1947", "1946", "1945", "1944", "1943", "1942", "1941", "1940", "1939", "1938", "1937", "1936", "1935", "1934", "1933", "1932", "1931", "1930", "1929", "1928", "1927", "1926", "1925", "1924", "1923", "1922", "1921", "1920", "1919", "1918", "1917", "1916", "1915", "1914", "1913", "1912", "1911", "1910", "1909", "1908", "1907", "1906", "1905", "1904", "1903", "1902", "1901", "1900" }));
-        anoEntradaReserva.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        anoEntradaReserva.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "2100", "2099", "2098", "2097", "2096", "2095", "2094", "2093", "2092", "2091", "2090", "2089", "2088", "2087", "2086", "2085", "2084", "2083", "2082", "2081", "2080", "2079", "2078", "2077", "2076", "2075", "2074", "2073", "2072", "2071", "2070", "2069", "2068", "2067", "2066", "2065", "2064", "2063", "2062", "2061", "2060", "2059", "2058", "2057", "2056", "2055", "2054", "2053", "2052", "2051", "2050", "2049", "2048", "2047", "2046", "2045", "2044", "2043", "2042", "2041", "2040", "2039", "2038", "2037", "2036", "2035", "2034", "2033", "2032", "2031", "2030", "2029", "2028", "2027", "2026", "2025", "2024", "2023", "2022", "2021", "2020", "2019", "2018", "2017", "2016", "2015", "2014", "2013", "2012", "2011", "2010", "2009", "2008", "2007", "2006", "2005", "2004", "2003", "2002", "2001", "2000" }));
+        anoEntradaReserva.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         anoEntradaReserva.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 anoEntradaReservaKeyPressed(evt);
@@ -4211,7 +4235,7 @@ public class Inicial extends javax.swing.JFrame {
         verQuartoReservaBtn.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         verQuartoReservaBtn.setForeground(new java.awt.Color(255, 255, 255));
         verQuartoReservaBtn.setText("Ver");
-        verQuartoReservaBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        verQuartoReservaBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         verQuartoReservaBtn.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 verQuartoReservaBtnMouseClicked(evt);
@@ -4229,7 +4253,7 @@ public class Inicial extends javax.swing.JFrame {
         diaSaidaReserva.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         diaSaidaReserva.setForeground(new java.awt.Color(255, 255, 255));
         diaSaidaReserva.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31" }));
-        diaSaidaReserva.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        diaSaidaReserva.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         diaSaidaReserva.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 diaSaidaReservaKeyPressed(evt);
@@ -4241,7 +4265,7 @@ public class Inicial extends javax.swing.JFrame {
         mesSaidaReserva.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         mesSaidaReserva.setForeground(new java.awt.Color(255, 255, 255));
         mesSaidaReserva.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12" }));
-        mesSaidaReserva.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        mesSaidaReserva.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         mesSaidaReserva.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 mesSaidaReservaKeyPressed(evt);
@@ -4252,8 +4276,8 @@ public class Inicial extends javax.swing.JFrame {
         anoSaidaReserva.setBackground(new java.awt.Color(0, 179, 136));
         anoSaidaReserva.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         anoSaidaReserva.setForeground(new java.awt.Color(255, 255, 255));
-        anoSaidaReserva.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "2019", "2018", "2017", "2016", "2015", "2014", "2013", "2012", "2011", "2010", "2009", "2008", "2007", "2006", "2005", "2004", "2003", "2002", "2001", "2000", "1999", "1998", "1997", "1996", "1995", "1994", "1993", "1992", "1991", "1990", "1989", "1988", "1987", "1986", "1985", "1984", "1983", "1982", "1981", "1980", "1979", "1978", "1977", "1976", "1975", "1974", "1973", "1972", "1971", "1970", "1969", "1968", "1967", "1966", "1965", "1964", "1963", "1962", "1961", "1960", "1959", "1958", "1957", "1956", "1955", "1954", "1953", "1952", "1951", "1950", "1949", "1948", "1947", "1946", "1945", "1944", "1943", "1942", "1941", "1940", "1939", "1938", "1937", "1936", "1935", "1934", "1933", "1932", "1931", "1930", "1929", "1928", "1927", "1926", "1925", "1924", "1923", "1922", "1921", "1920", "1919", "1918", "1917", "1916", "1915", "1914", "1913", "1912", "1911", "1910", "1909", "1908", "1907", "1906", "1905", "1904", "1903", "1902", "1901", "1900" }));
-        anoSaidaReserva.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        anoSaidaReserva.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "2100", "2099", "2098", "2097", "2096", "2095", "2094", "2093", "2092", "2091", "2090", "2089", "2088", "2087", "2086", "2085", "2084", "2083", "2082", "2081", "2080", "2079", "2078", "2077", "2076", "2075", "2074", "2073", "2072", "2071", "2070", "2069", "2068", "2067", "2066", "2065", "2064", "2063", "2062", "2061", "2060", "2059", "2058", "2057", "2056", "2055", "2054", "2053", "2052", "2051", "2050", "2049", "2048", "2047", "2046", "2045", "2044", "2043", "2042", "2041", "2040", "2039", "2038", "2037", "2036", "2035", "2034", "2033", "2032", "2031", "2030", "2029", "2028", "2027", "2026", "2025", "2024", "2023", "2022", "2021", "2020", "2019", "2018", "2017", "2016", "2015", "2014", "2013", "2012", "2011", "2010", "2009", "2008", "2007", "2006", "2005", "2004", "2003", "2002", "2001", "2000" }));
+        anoSaidaReserva.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         anoSaidaReserva.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 anoSaidaReservaKeyPressed(evt);
@@ -4270,7 +4294,7 @@ public class Inicial extends javax.swing.JFrame {
         cadastrarReservaBtn.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         cadastrarReservaBtn.setForeground(new java.awt.Color(255, 255, 255));
         cadastrarReservaBtn.setText("Cadastrar");
-        cadastrarReservaBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        cadastrarReservaBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         cadastrarReservaBtn.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 cadastrarReservaBtnMouseClicked(evt);
@@ -4282,7 +4306,7 @@ public class Inicial extends javax.swing.JFrame {
         diaEntradaReserva.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         diaEntradaReserva.setForeground(new java.awt.Color(255, 255, 255));
         diaEntradaReserva.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31" }));
-        diaEntradaReserva.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        diaEntradaReserva.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         diaEntradaReserva.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 diaEntradaReservaKeyPressed(evt);
@@ -4373,7 +4397,7 @@ public class Inicial extends javax.swing.JFrame {
         verHospedeReservaBtn.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         verHospedeReservaBtn.setForeground(new java.awt.Color(255, 255, 255));
         verHospedeReservaBtn.setText("Ver");
-        verHospedeReservaBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        verHospedeReservaBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         verHospedeReservaBtn.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 verHospedeReservaBtnMouseClicked(evt);
@@ -4475,7 +4499,7 @@ public class Inicial extends javax.swing.JFrame {
         excluirResBtn.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         excluirResBtn.setForeground(new java.awt.Color(255, 255, 255));
         excluirResBtn.setText("Excluir");
-        excluirResBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        excluirResBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         excluirResBtn.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 excluirResBtnMouseClicked(evt);
@@ -4637,7 +4661,7 @@ public class Inicial extends javax.swing.JFrame {
         mesEntradaReservaMod.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         mesEntradaReservaMod.setForeground(new java.awt.Color(255, 255, 255));
         mesEntradaReservaMod.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12" }));
-        mesEntradaReservaMod.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        mesEntradaReservaMod.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         mesEntradaReservaMod.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 mesEntradaReservaModKeyPressed(evt);
@@ -4648,8 +4672,8 @@ public class Inicial extends javax.swing.JFrame {
         anoEntradaReservaMod.setBackground(new java.awt.Color(140, 0, 240));
         anoEntradaReservaMod.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         anoEntradaReservaMod.setForeground(new java.awt.Color(255, 255, 255));
-        anoEntradaReservaMod.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "2019", "2018", "2017", "2016", "2015", "2014", "2013", "2012", "2011", "2010", "2009", "2008", "2007", "2006", "2005", "2004", "2003", "2002", "2001", "2000", "1999", "1998", "1997", "1996", "1995", "1994", "1993", "1992", "1991", "1990", "1989", "1988", "1987", "1986", "1985", "1984", "1983", "1982", "1981", "1980", "1979", "1978", "1977", "1976", "1975", "1974", "1973", "1972", "1971", "1970", "1969", "1968", "1967", "1966", "1965", "1964", "1963", "1962", "1961", "1960", "1959", "1958", "1957", "1956", "1955", "1954", "1953", "1952", "1951", "1950", "1949", "1948", "1947", "1946", "1945", "1944", "1943", "1942", "1941", "1940", "1939", "1938", "1937", "1936", "1935", "1934", "1933", "1932", "1931", "1930", "1929", "1928", "1927", "1926", "1925", "1924", "1923", "1922", "1921", "1920", "1919", "1918", "1917", "1916", "1915", "1914", "1913", "1912", "1911", "1910", "1909", "1908", "1907", "1906", "1905", "1904", "1903", "1902", "1901", "1900" }));
-        anoEntradaReservaMod.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        anoEntradaReservaMod.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "2100", "2099", "2098", "2097", "2096", "2095", "2094", "2093", "2092", "2091", "2090", "2089", "2088", "2087", "2086", "2085", "2084", "2083", "2082", "2081", "2080", "2079", "2078", "2077", "2076", "2075", "2074", "2073", "2072", "2071", "2070", "2069", "2068", "2067", "2066", "2065", "2064", "2063", "2062", "2061", "2060", "2059", "2058", "2057", "2056", "2055", "2054", "2053", "2052", "2051", "2050", "2049", "2048", "2047", "2046", "2045", "2044", "2043", "2042", "2041", "2040", "2039", "2038", "2037", "2036", "2035", "2034", "2033", "2032", "2031", "2030", "2029", "2028", "2027", "2026", "2025", "2024", "2023", "2022", "2021", "2020", "2019", "2018", "2017", "2016", "2015", "2014", "2013", "2012", "2011", "2010", "2009", "2008", "2007", "2006", "2005", "2004", "2003", "2002", "2001", "2000" }));
+        anoEntradaReservaMod.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         anoEntradaReservaMod.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 anoEntradaReservaModKeyPressed(evt);
@@ -4667,7 +4691,7 @@ public class Inicial extends javax.swing.JFrame {
         diaSaidaReservaMod.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         diaSaidaReservaMod.setForeground(new java.awt.Color(255, 255, 255));
         diaSaidaReservaMod.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31" }));
-        diaSaidaReservaMod.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        diaSaidaReservaMod.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         diaSaidaReservaMod.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 diaSaidaReservaModKeyPressed(evt);
@@ -4679,7 +4703,7 @@ public class Inicial extends javax.swing.JFrame {
         mesSaidaReservaMod.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         mesSaidaReservaMod.setForeground(new java.awt.Color(255, 255, 255));
         mesSaidaReservaMod.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12" }));
-        mesSaidaReservaMod.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        mesSaidaReservaMod.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         mesSaidaReservaMod.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 mesSaidaReservaModKeyPressed(evt);
@@ -4690,8 +4714,9 @@ public class Inicial extends javax.swing.JFrame {
         anoSaidaReservaMod.setBackground(new java.awt.Color(140, 0, 240));
         anoSaidaReservaMod.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         anoSaidaReservaMod.setForeground(new java.awt.Color(255, 255, 255));
-        anoSaidaReservaMod.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "2019", "2018", "2017", "2016", "2015", "2014", "2013", "2012", "2011", "2010", "2009", "2008", "2007", "2006", "2005", "2004", "2003", "2002", "2001", "2000", "1999", "1998", "1997", "1996", "1995", "1994", "1993", "1992", "1991", "1990", "1989", "1988", "1987", "1986", "1985", "1984", "1983", "1982", "1981", "1980", "1979", "1978", "1977", "1976", "1975", "1974", "1973", "1972", "1971", "1970", "1969", "1968", "1967", "1966", "1965", "1964", "1963", "1962", "1961", "1960", "1959", "1958", "1957", "1956", "1955", "1954", "1953", "1952", "1951", "1950", "1949", "1948", "1947", "1946", "1945", "1944", "1943", "1942", "1941", "1940", "1939", "1938", "1937", "1936", "1935", "1934", "1933", "1932", "1931", "1930", "1929", "1928", "1927", "1926", "1925", "1924", "1923", "1922", "1921", "1920", "1919", "1918", "1917", "1916", "1915", "1914", "1913", "1912", "1911", "1910", "1909", "1908", "1907", "1906", "1905", "1904", "1903", "1902", "1901", "1900" }));
-        anoSaidaReservaMod.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        anoSaidaReservaMod.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "2100", "2099", "2098", "2097", "2096", "2095", "2094", "2093", "2092", "2091", "2090", "2089", "2088", "2087", "2086", "2085", "2084", "2083", "2082", "2081", "2080", "2079", "2078", "2077", "2076", "2075", "2074", "2073", "2072", "2071", "2070", "2069", "2068", "2067", "2066", "2065", "2064", "2063", "2062", "2061", "2060", "2059", "2058", "2057", "2056", "2055", "2054", "2053", "2052", "2051", "2050", "2049", "2048", "2047", "2046", "2045", "2044", "2043", "2042", "2041", "2040", "2039", "2038", "2037", "2036", "2035", "2034", "2033", "2032", "2031", "2030", "2029", "2028", "2027", "2026", "2025", "2024", "2023", "2022", "2021", "2020", "2019", "2018", "2017", "2016", "2015", "2014", "2013", "2012", "2011", "2010", "2009", "2008", "2007", "2006", "2005", "2004", "2003", "2002", "2001", "2000" }));
+        anoSaidaReservaMod.setSelectedItem(anoSaidaReserva);
+        anoSaidaReservaMod.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         anoSaidaReservaMod.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 anoSaidaReservaModKeyPressed(evt);
@@ -4703,7 +4728,7 @@ public class Inicial extends javax.swing.JFrame {
         diaEntradaReservaMod.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         diaEntradaReservaMod.setForeground(new java.awt.Color(255, 255, 255));
         diaEntradaReservaMod.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31" }));
-        diaEntradaReservaMod.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        diaEntradaReservaMod.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         diaEntradaReservaMod.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 diaEntradaReservaModKeyPressed(evt);
@@ -4743,7 +4768,7 @@ public class Inicial extends javax.swing.JFrame {
         modificarReservaBtn.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         modificarReservaBtn.setForeground(new java.awt.Color(255, 255, 255));
         modificarReservaBtn.setText("Modificar");
-        modificarReservaBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        modificarReservaBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         modificarReservaBtn.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 modificarReservaBtnMouseClicked(evt);
@@ -4772,7 +4797,7 @@ public class Inicial extends javax.swing.JFrame {
         estadoResModTxt.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         estadoResModTxt.setForeground(new java.awt.Color(255, 255, 255));
         estadoResModTxt.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Reservado", "Em estadia", "Concluído" }));
-        estadoResModTxt.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        estadoResModTxt.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         estadoResModTxt.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 estadoResModTxtKeyPressed(evt);
@@ -4832,7 +4857,7 @@ public class Inicial extends javax.swing.JFrame {
         diaPag.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         diaPag.setForeground(new java.awt.Color(255, 255, 255));
         diaPag.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31" }));
-        diaPag.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        diaPag.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         diaPag.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 diaPagKeyPressed(evt);
@@ -4844,7 +4869,7 @@ public class Inicial extends javax.swing.JFrame {
         mesPag.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         mesPag.setForeground(new java.awt.Color(255, 255, 255));
         mesPag.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12" }));
-        mesPag.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        mesPag.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         mesPag.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 mesPagKeyPressed(evt);
@@ -4855,8 +4880,8 @@ public class Inicial extends javax.swing.JFrame {
         anoPag.setBackground(new java.awt.Color(0, 179, 136));
         anoPag.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         anoPag.setForeground(new java.awt.Color(255, 255, 255));
-        anoPag.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "2019", "2018", "2017", "2016", "2015", "2014", "2013", "2012", "2011", "2010", "2009", "2008", "2007", "2006", "2005", "2004", "2003", "2002", "2001", "2000", "1999", "1998", "1997", "1996", "1995", "1994", "1993", "1992", "1991", "1990", "1989", "1988", "1987", "1986", "1985", "1984", "1983", "1982", "1981", "1980", "1979", "1978", "1977", "1976", "1975", "1974", "1973", "1972", "1971", "1970", "1969", "1968", "1967", "1966", "1965", "1964", "1963", "1962", "1961", "1960", "1959", "1958", "1957", "1956", "1955", "1954", "1953", "1952", "1951", "1950", "1949", "1948", "1947", "1946", "1945", "1944", "1943", "1942", "1941", "1940", "1939", "1938", "1937", "1936", "1935", "1934", "1933", "1932", "1931", "1930", "1929", "1928", "1927", "1926", "1925", "1924", "1923", "1922", "1921", "1920", "1919", "1918", "1917", "1916", "1915", "1914", "1913", "1912", "1911", "1910", "1909", "1908", "1907", "1906", "1905", "1904", "1903", "1902", "1901", "1900" }));
-        anoPag.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        anoPag.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "2100", "2099", "2098", "2097", "2096", "2095", "2094", "2093", "2092", "2091", "2090", "2089", "2088", "2087", "2086", "2085", "2084", "2083", "2082", "2081", "2080", "2079", "2078", "2077", "2076", "2075", "2074", "2073", "2072", "2071", "2070", "2069", "2068", "2067", "2066", "2065", "2064", "2063", "2062", "2061", "2060", "2059", "2058", "2057", "2056", "2055", "2054", "2053", "2052", "2051", "2050", "2049", "2048", "2047", "2046", "2045", "2044", "2043", "2042", "2041", "2040", "2039", "2038", "2037", "2036", "2035", "2034", "2033", "2032", "2031", "2030", "2029", "2028", "2027", "2026", "2025", "2024", "2023", "2022", "2021", "2020", "2019", "2018", "2017", "2016", "2015", "2014", "2013", "2012", "2011", "2010", "2009", "2008", "2007", "2006", "2005", "2004", "2003", "2002", "2001", "2000" }));
+        anoPag.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         anoPag.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 anoPagKeyPressed(evt);
@@ -4888,7 +4913,7 @@ public class Inicial extends javax.swing.JFrame {
         cadastrarPagBtn.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         cadastrarPagBtn.setForeground(new java.awt.Color(255, 255, 255));
         cadastrarPagBtn.setText("Cadastrar");
-        cadastrarPagBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        cadastrarPagBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         cadastrarPagBtn.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 cadastrarPagBtnMouseClicked(evt);
@@ -4994,7 +5019,7 @@ public class Inicial extends javax.swing.JFrame {
         excluirPagBtn.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         excluirPagBtn.setForeground(new java.awt.Color(255, 255, 255));
         excluirPagBtn.setText("Excluir");
-        excluirPagBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        excluirPagBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         excluirPagBtn.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 excluirPagBtnMouseClicked(evt);
@@ -5146,7 +5171,7 @@ public class Inicial extends javax.swing.JFrame {
         diaPagMod.setForeground(new java.awt.Color(255, 255, 255));
         diaPagMod.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31" }));
         diaPagMod.setSelectedIndex(1);
-        diaPagMod.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        diaPagMod.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         diaPagMod.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 diaPagModKeyPressed(evt);
@@ -5158,7 +5183,7 @@ public class Inicial extends javax.swing.JFrame {
         mesPagMod.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         mesPagMod.setForeground(new java.awt.Color(255, 255, 255));
         mesPagMod.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12" }));
-        mesPagMod.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        mesPagMod.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         mesPagMod.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 mesPagModKeyPressed(evt);
@@ -5169,8 +5194,8 @@ public class Inicial extends javax.swing.JFrame {
         anoPagMod.setBackground(new java.awt.Color(140, 0, 240));
         anoPagMod.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         anoPagMod.setForeground(new java.awt.Color(255, 255, 255));
-        anoPagMod.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "2019", "2018", "2017", "2016", "2015", "2014", "2013", "2012", "2011", "2010", "2009", "2008", "2007", "2006", "2005", "2004", "2003", "2002", "2001", "2000", "1999", "1998", "1997", "1996", "1995", "1994", "1993", "1992", "1991", "1990", "1989", "1988", "1987", "1986", "1985", "1984", "1983", "1982", "1981", "1980", "1979", "1978", "1977", "1976", "1975", "1974", "1973", "1972", "1971", "1970", "1969", "1968", "1967", "1966", "1965", "1964", "1963", "1962", "1961", "1960", "1959", "1958", "1957", "1956", "1955", "1954", "1953", "1952", "1951", "1950", "1949", "1948", "1947", "1946", "1945", "1944", "1943", "1942", "1941", "1940", "1939", "1938", "1937", "1936", "1935", "1934", "1933", "1932", "1931", "1930", "1929", "1928", "1927", "1926", "1925", "1924", "1923", "1922", "1921", "1920", "1919", "1918", "1917", "1916", "1915", "1914", "1913", "1912", "1911", "1910", "1909", "1908", "1907", "1906", "1905", "1904", "1903", "1902", "1901", "1900" }));
-        anoPagMod.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        anoPagMod.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "2100", "2099", "2098", "2097", "2096", "2095", "2094", "2093", "2092", "2091", "2090", "2089", "2088", "2087", "2086", "2085", "2084", "2083", "2082", "2081", "2080", "2079", "2078", "2077", "2076", "2075", "2074", "2073", "2072", "2071", "2070", "2069", "2068", "2067", "2066", "2065", "2064", "2063", "2062", "2061", "2060", "2059", "2058", "2057", "2056", "2055", "2054", "2053", "2052", "2051", "2050", "2049", "2048", "2047", "2046", "2045", "2044", "2043", "2042", "2041", "2040", "2039", "2038", "2037", "2036", "2035", "2034", "2033", "2032", "2031", "2030", "2029", "2028", "2027", "2026", "2025", "2024", "2023", "2022", "2021", "2020", "2019", "2018", "2017", "2016", "2015", "2014", "2013", "2012", "2011", "2010", "2009", "2008", "2007", "2006", "2005", "2004", "2003", "2002", "2001", "2000" }));
+        anoPagMod.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         anoPagMod.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 anoPagModKeyPressed(evt);
@@ -5188,7 +5213,7 @@ public class Inicial extends javax.swing.JFrame {
         modificarPagBtn.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         modificarPagBtn.setForeground(new java.awt.Color(255, 255, 255));
         modificarPagBtn.setText("Modificar");
-        modificarPagBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        modificarPagBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         modificarPagBtn.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 modificarPagBtnMouseClicked(evt);
@@ -5308,7 +5333,7 @@ public class Inicial extends javax.swing.JFrame {
         diaLem.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         diaLem.setForeground(new java.awt.Color(255, 255, 255));
         diaLem.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31" }));
-        diaLem.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        diaLem.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         diaLem.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 diaLemKeyPressed(evt);
@@ -5320,7 +5345,7 @@ public class Inicial extends javax.swing.JFrame {
         mesLem.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         mesLem.setForeground(new java.awt.Color(255, 255, 255));
         mesLem.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12" }));
-        mesLem.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        mesLem.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         mesLem.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 mesLemKeyPressed(evt);
@@ -5332,7 +5357,7 @@ public class Inicial extends javax.swing.JFrame {
         anoLem.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         anoLem.setForeground(new java.awt.Color(255, 255, 255));
         anoLem.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "2100", "2099", "2098", "2097", "2096", "2095", "2094", "2093", "2092", "2091", "2090", "2089", "2088", "2087", "2086", "2085", "2084", "2083", "2082", "2081", "2080", "2079", "2078", "2077", "2076", "2075", "2074", "2073", "2072", "2071", "2070", "2069", "2068", "2067", "2066", "2065", "2064", "2063", "2062", "2061", "2060", "2059", "2058", "2057", "2056", "2055", "2054", "2053", "2052", "2051", "2050", "2049", "2048", "2047", "2046", "2045", "2044", "2043", "2042", "2041", "2040", "2039", "2038", "2037", "2036", "2035", "2034", "2033", "2032", "2031", "2030", "2029", "2028", "2027", "2026", "2025", "2024", "2023", "2022", "2021", "2020", "2019", "2018", "2017", "2016", "2015", "2014", "2013", "2012", "2011", "2010", "2009", "2008", "2007", "2006", "2005", "2004", "2003", "2002", "2001", "2000", "1999", "1998", "1997", "1996", "1995", "1994", "1993", "1992", "1991", "1990", "1989", "1988", "1987", "1986", "1985", "1984", "1983", "1982", "1981", "1980", "1979", "1978", "1977", "1976", "1975", "1974", "1973", "1972", "1971", "1970", "1969", "1968", "1967", "1966", "1965", "1964", "1963", "1962", "1961", "1960", "1959", "1958", "1957", "1956", "1955", "1954", "1953", "1952", "1951", "1950", "1949", "1948", "1947", "1946", "1945", "1944", "1943", "1942", "1941", "1940", "1939", "1938", "1937", "1936", "1935", "1934", "1933", "1932", "1931", "1930", "1929", "1928", "1927", "1926", "1925", "1924", "1923", "1922", "1921", "1920", "1919", "1918", "1917", "1916", "1915", "1914", "1913", "1912", "1911", "1910", "1909", "1908", "1907", "1906", "1905", "1904", "1903", "1902", "1901", "1900" }));
-        anoLem.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        anoLem.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         anoLem.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 anoLemKeyPressed(evt);
@@ -5344,7 +5369,7 @@ public class Inicial extends javax.swing.JFrame {
         cadastrarLemBtn.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         cadastrarLemBtn.setForeground(new java.awt.Color(255, 255, 255));
         cadastrarLemBtn.setText("Cadastrar");
-        cadastrarLemBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        cadastrarLemBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         cadastrarLemBtn.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 cadastrarLemBtnMouseClicked(evt);
@@ -5462,7 +5487,7 @@ public class Inicial extends javax.swing.JFrame {
         excluirLemBtn.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         excluirLemBtn.setForeground(new java.awt.Color(255, 255, 255));
         excluirLemBtn.setText("Excluir");
-        excluirLemBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        excluirLemBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         excluirLemBtn.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 excluirLemBtnMouseClicked(evt);
@@ -5604,47 +5629,47 @@ public class Inicial extends javax.swing.JFrame {
         dataLemMod.setText("Para o dia");
         modificarLembrete.add(dataLemMod, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 390, 80, 30));
 
-        diaLem1.setBackground(new java.awt.Color(140, 0, 240));
-        diaLem1.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        diaLem1.setForeground(new java.awt.Color(255, 255, 255));
-        diaLem1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31" }));
-        diaLem1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        diaLem1.addKeyListener(new java.awt.event.KeyAdapter() {
+        diaLemMod.setBackground(new java.awt.Color(140, 0, 240));
+        diaLemMod.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        diaLemMod.setForeground(new java.awt.Color(255, 255, 255));
+        diaLemMod.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31" }));
+        diaLemMod.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        diaLemMod.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
-                diaLem1KeyPressed(evt);
+                diaLemModKeyPressed(evt);
             }
         });
-        modificarLembrete.add(diaLem1, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 390, 50, 30));
+        modificarLembrete.add(diaLemMod, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 390, 50, 30));
 
-        mesLem1.setBackground(new java.awt.Color(140, 0, 240));
-        mesLem1.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        mesLem1.setForeground(new java.awt.Color(255, 255, 255));
-        mesLem1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12" }));
-        mesLem1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        mesLem1.addKeyListener(new java.awt.event.KeyAdapter() {
+        mesLemMod.setBackground(new java.awt.Color(140, 0, 240));
+        mesLemMod.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        mesLemMod.setForeground(new java.awt.Color(255, 255, 255));
+        mesLemMod.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12" }));
+        mesLemMod.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        mesLemMod.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
-                mesLem1KeyPressed(evt);
+                mesLemModKeyPressed(evt);
             }
         });
-        modificarLembrete.add(mesLem1, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 390, 50, 30));
+        modificarLembrete.add(mesLemMod, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 390, 50, 30));
 
-        anoLem1.setBackground(new java.awt.Color(140, 0, 240));
-        anoLem1.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        anoLem1.setForeground(new java.awt.Color(255, 255, 255));
-        anoLem1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "2100", "2099", "2098", "2097", "2096", "2095", "2094", "2093", "2092", "2091", "2090", "2089", "2088", "2087", "2086", "2085", "2084", "2083", "2082", "2081", "2080", "2079", "2078", "2077", "2076", "2075", "2074", "2073", "2072", "2071", "2070", "2069", "2068", "2067", "2066", "2065", "2064", "2063", "2062", "2061", "2060", "2059", "2058", "2057", "2056", "2055", "2054", "2053", "2052", "2051", "2050", "2049", "2048", "2047", "2046", "2045", "2044", "2043", "2042", "2041", "2040", "2039", "2038", "2037", "2036", "2035", "2034", "2033", "2032", "2031", "2030", "2029", "2028", "2027", "2026", "2025", "2024", "2023", "2022", "2021", "2020", "2019", "2018", "2017", "2016", "2015", "2014", "2013", "2012", "2011", "2010", "2009", "2008", "2007", "2006", "2005", "2004", "2003", "2002", "2001", "2000", "1999", "1998", "1997", "1996", "1995", "1994", "1993", "1992", "1991", "1990", "1989", "1988", "1987", "1986", "1985", "1984", "1983", "1982", "1981", "1980", "1979", "1978", "1977", "1976", "1975", "1974", "1973", "1972", "1971", "1970", "1969", "1968", "1967", "1966", "1965", "1964", "1963", "1962", "1961", "1960", "1959", "1958", "1957", "1956", "1955", "1954", "1953", "1952", "1951", "1950", "1949", "1948", "1947", "1946", "1945", "1944", "1943", "1942", "1941", "1940", "1939", "1938", "1937", "1936", "1935", "1934", "1933", "1932", "1931", "1930", "1929", "1928", "1927", "1926", "1925", "1924", "1923", "1922", "1921", "1920", "1919", "1918", "1917", "1916", "1915", "1914", "1913", "1912", "1911", "1910", "1909", "1908", "1907", "1906", "1905", "1904", "1903", "1902", "1901", "1900" }));
-        anoLem1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        anoLem1.addKeyListener(new java.awt.event.KeyAdapter() {
+        anoLemMod.setBackground(new java.awt.Color(140, 0, 240));
+        anoLemMod.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        anoLemMod.setForeground(new java.awt.Color(255, 255, 255));
+        anoLemMod.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "2100", "2099", "2098", "2097", "2096", "2095", "2094", "2093", "2092", "2091", "2090", "2089", "2088", "2087", "2086", "2085", "2084", "2083", "2082", "2081", "2080", "2079", "2078", "2077", "2076", "2075", "2074", "2073", "2072", "2071", "2070", "2069", "2068", "2067", "2066", "2065", "2064", "2063", "2062", "2061", "2060", "2059", "2058", "2057", "2056", "2055", "2054", "2053", "2052", "2051", "2050", "2049", "2048", "2047", "2046", "2045", "2044", "2043", "2042", "2041", "2040", "2039", "2038", "2037", "2036", "2035", "2034", "2033", "2032", "2031", "2030", "2029", "2028", "2027", "2026", "2025", "2024", "2023", "2022", "2021", "2020", "2019", "2018", "2017", "2016", "2015", "2014", "2013", "2012", "2011", "2010", "2009", "2008", "2007", "2006", "2005", "2004", "2003", "2002", "2001", "2000", "1999", "1998", "1997", "1996", "1995", "1994", "1993", "1992", "1991", "1990", "1989", "1988", "1987", "1986", "1985", "1984", "1983", "1982", "1981", "1980", "1979", "1978", "1977", "1976", "1975", "1974", "1973", "1972", "1971", "1970", "1969", "1968", "1967", "1966", "1965", "1964", "1963", "1962", "1961", "1960", "1959", "1958", "1957", "1956", "1955", "1954", "1953", "1952", "1951", "1950", "1949", "1948", "1947", "1946", "1945", "1944", "1943", "1942", "1941", "1940", "1939", "1938", "1937", "1936", "1935", "1934", "1933", "1932", "1931", "1930", "1929", "1928", "1927", "1926", "1925", "1924", "1923", "1922", "1921", "1920", "1919", "1918", "1917", "1916", "1915", "1914", "1913", "1912", "1911", "1910", "1909", "1908", "1907", "1906", "1905", "1904", "1903", "1902", "1901", "1900" }));
+        anoLemMod.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        anoLemMod.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
-                anoLem1KeyPressed(evt);
+                anoLemModKeyPressed(evt);
             }
         });
-        modificarLembrete.add(anoLem1, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 390, 60, 30));
+        modificarLembrete.add(anoLemMod, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 390, 60, 30));
 
         cadastrarLemBtn1.setBackground(new java.awt.Color(140, 0, 240));
         cadastrarLemBtn1.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         cadastrarLemBtn1.setForeground(new java.awt.Color(255, 255, 255));
         cadastrarLemBtn1.setText("Modificar");
-        cadastrarLemBtn1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        cadastrarLemBtn1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         cadastrarLemBtn1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 cadastrarLemBtn1MouseClicked(evt);
@@ -5816,7 +5841,7 @@ public class Inicial extends javax.swing.JFrame {
 
         logout.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         logout.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgs/icon-logout.png"))); // NOI18N
-        logout.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        logout.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         logout.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 logoutMouseClicked(evt);
@@ -5880,11 +5905,49 @@ public class Inicial extends javax.swing.JFrame {
     }
 
     private void sairTxtMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_sairTxtMouseClicked
-        System.exit(0);
+        Toolkit tk = Toolkit.getDefaultToolkit();
+        Dimension srcsize = tk.getScreenSize();//usar <var>.getWidth() para largura e <var>.getHeight() para altura
+        Thread t = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                for (int c = 0; c <= (srcsize.getHeight()-(getFrames()[1].getY()-srcsize.getHeight())); c++) {
+                    try {
+                        Thread.sleep(1);
+                        getFrames()[1].setResizable(true);
+                        getFrames()[1].setBounds(getX(), getY()+3, 1100, 600);
+                    } catch (InterruptedException ex) {
+                        JOptionPane.showMessageDialog(null, "Erro no thread: " + ex);
+                    }
+                }
+                System.exit(0);
+            }
+        });
+        t.start();
     }//GEN-LAST:event_sairTxtMouseClicked
 
     private void minimizarTxtMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_minimizarTxtMouseClicked
-        this.setState(1);
+        Toolkit tk = Toolkit.getDefaultToolkit();
+        Dimension srcsize = tk.getScreenSize();//usar <var>.getWidth() para largura e <var>.getHeight() para altura
+        Thread tMIN = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                int x = getFrames()[1].getX();
+                int y = getFrames()[1].getY();
+                for (int c = 0; c <= (srcsize.getHeight() - (getFrames()[1].getY() - srcsize.getHeight())); c++) {
+                    try {
+                        Thread.sleep(1);
+                        getFrames()[1].setResizable(true);
+                        getFrames()[1].setBounds(x, getY() + 3, 1100, 600);
+                        //System.out.println(getFrames()[1]);
+                    } catch (InterruptedException ex) {
+                        JOptionPane.showMessageDialog(null, "Erro no thread: " + ex);
+                    }
+                }
+                getFrames()[1].setState(1);
+                getFrames()[1].setBounds(x, y, 1100, 600);
+            }
+        });
+        tMIN.start();
     }//GEN-LAST:event_minimizarTxtMouseClicked
 
     private void nomeFuncionarioTxtKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_nomeFuncionarioTxtKeyTyped
@@ -6413,10 +6476,10 @@ public class Inicial extends javax.swing.JFrame {
     private void cadastrarReservaBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cadastrarReservaBtnMouseClicked
         int linha = selectHospedeReserva.getSelectedRow();
         erroReserva.setText("");
-        
+
         String entrada = anoEntradaReserva.getSelectedItem() + "-" + mesEntradaReserva.getSelectedItem() + "-" + diaEntradaReserva.getSelectedItem();
         String saida = anoSaidaReserva.getSelectedItem() + "-" + mesSaidaReserva.getSelectedItem() + "-" + diaSaidaReserva.getSelectedItem();
-        
+
         if (numQuartoReservaTxt.getText().equals("") || nomeHospReservaTxt.getText().equals("")) {
             erroReserva.setText("Um ou mais campos foram deixados vazios!");
             MessageStatus m = new MessageStatus(usuario, nome, "Um ou mais campos foram deixados vazios.", "erro");
@@ -6536,7 +6599,6 @@ public class Inicial extends javax.swing.JFrame {
         int linha = selectFuncReserva.getSelectedRow();
         if (linha != -1) {
             new Conection().executeComand("DELETE FROM funcionarios WHERE idFuncionario = " + (selectFuncReserva.getValueAt(linha, 0).toString()) + ";", "Exclusão do funcionário");
-            System.out.println("Excluindo o ID: " + (selectFuncReserva.getValueAt(linha, 0).toString()) + " do banco de dados...");
             selectFuncJTable("SELECT * FROM funcionarios WHERE nome like '%" + nomeFuncExcluirTxt.getText().replace("'", "") + "%';");
             descricaoFuncExcluir.setText("");
         } else {
@@ -6566,7 +6628,6 @@ public class Inicial extends javax.swing.JFrame {
             if (linha != -1) {
                 new Conection().executeComand("DELETE FROM reservas WHERE id_hospede = " + (selectHospedeExcluir.getValueAt(linha, 0).toString()) + ";", "");
                 new Conection().executeComand("DELETE FROM hospedes WHERE idHospede = " + (selectHospedeExcluir.getValueAt(linha, 0).toString()) + ";", "Exclusão do hóspede");
-                System.out.println("Excluindo o ID: " + (selectHospedeExcluir.getValueAt(linha, 0).toString()) + " do banco de dados...");
             } else {
                 MessageStatus m = new MessageStatus(usuario, nome, "Erro, nenhuma linha selecionada.", "erro");
                 m.setLocationRelativeTo(null);
@@ -6602,7 +6663,6 @@ public class Inicial extends javax.swing.JFrame {
             if (linha != -1) {
                 new Conection().executeComand("DELETE FROM reservas WHERE num_quarto = " + (selectQuartosExcluir.getValueAt(linha, 0).toString()) + ";", "");
                 new Conection().executeComand("DELETE FROM quartos WHERE numero = " + (selectQuartosExcluir.getValueAt(linha, 0).toString()) + ";", "Exclusão do quarto");
-                System.out.println("Excluindo o ID: " + (selectQuartosExcluir.getValueAt(linha, 0).toString()) + " do banco de dados...");
             } else {
                 MessageStatus m = new MessageStatus(usuario, nome, "Erro, nenhuma linha selecionada.", "erro");
                 m.setLocationRelativeTo(null);
@@ -6812,10 +6872,6 @@ public class Inicial extends javax.swing.JFrame {
         });
         //fim da animação das linhas
         //----------------------------------------------------------------------
-        if (iconsAnimation.getState().equals("RUNNABLE")) {
-            iconsAnimation.stop();
-            System.out.println("thread executando");
-        }
         iconsAnimation.start();
         linesAnimation.start();
         funcsAnimation.start();
@@ -6855,7 +6911,6 @@ public class Inicial extends javax.swing.JFrame {
         int linha = selectReservasExcluir.getSelectedRow();
         if (linha != -1) {
             new Conection().executeComand("DELETE FROM reservas WHERE idReserva = " + (selectReservasExcluir.getValueAt(linha, 0).toString()) + ";", "Exclusão da reserva");
-            System.out.println("Excluindo o ID: " + (selectReservasExcluir.getValueAt(linha, 0).toString()) + " do banco de dados...");
             descResExcluir.setText("");
         } else {
             MessageStatus m = new MessageStatus(usuario, nome, "Erro, nenhuma linha selecionada.", "erro");
@@ -6953,7 +7008,6 @@ public class Inicial extends javax.swing.JFrame {
         int linha = selectPagamentosExcluir.getSelectedRow();
         if (linha != -1) {
             new Conection().executeComand("DELETE FROM pagamento WHERE idPagamento = " + (selectPagamentosExcluir.getValueAt(linha, 0).toString()) + ";", "Exclusão do pagamento");
-            System.out.println("Excluindo o ID: " + (selectPagamentosExcluir.getValueAt(linha, 0).toString()) + " do banco de dados...");
             descPagExcluir.setText("");
         } else {
             MessageStatus m = new MessageStatus(usuario, nome, "Erro, nenhuma linha selecionada.", "erro");
@@ -6985,7 +7039,6 @@ public class Inicial extends javax.swing.JFrame {
         int linha = selectLembretesExcluir.getSelectedRow();
         if (linha != -1) {
             new Conection().executeComand("DELETE FROM lembrete WHERE idLembrete = " + (selectLembretesExcluir.getValueAt(linha, 0).toString()) + ";", "Exclusão do lembrete");
-            System.out.println("Excluindo o ID: " + (selectLembretesExcluir.getValueAt(linha, 0).toString()) + " do banco de dados...");
             descPagExcluir.setText("");
         } else {
             MessageStatus m = new MessageStatus(usuario, nome, "Erro, nenhuma linha selecionada.", "erro");
@@ -7417,13 +7470,13 @@ public class Inicial extends javax.swing.JFrame {
         if (!caracteres.contains(evt.getKeyChar() + "") || numQuartoTxtMod.getText().length() >= 4) {
             evt.consume();
         }
-        
-        if (numQuartoTxtMod.getText().equals("") && 
-                (precoQuartoTxtMod.getText().length() > 0 || 
-                andarQuartoTxtMod.getText().length() > 0 || 
-                tipoQuartoTxtMod.getText().length() > 0 || 
+
+        if (numQuartoTxtMod.getText().equals("") &&
+                (precoQuartoTxtMod.getText().length() > 0 ||
+                andarQuartoTxtMod.getText().length() > 0 ||
+                tipoQuartoTxtMod.getText().length() > 0 ||
                 descricaoQuartoTxtMod.getText().length() > 0) ) {
-            
+
             precoQuartoTxtMod.setText("");
             andarQuartoTxtMod.setText("");
             tipoQuartoTxtMod.setText("");
@@ -7534,10 +7587,10 @@ public class Inicial extends javax.swing.JFrame {
 
     private void modificarReservaBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_modificarReservaBtnMouseClicked
         erroResMod.setText("");
-        
+
         String entrada = anoEntradaReservaMod.getSelectedItem() + "-" + mesEntradaReservaMod.getSelectedItem() + "-" + diaEntradaReservaMod.getSelectedItem();
         String saida = anoSaidaReservaMod.getSelectedItem() + "-" + mesSaidaReservaMod.getSelectedItem() + "-" + diaSaidaReservaMod.getSelectedItem();
-        
+
         if (estadoResModTxt.getSelectedItem().equals("") || numQuaResModTxt.getText().equals("")) {
             erroResMod.setText("Um ou mais campos foram deixados vazios!");
             MessageStatus m = new MessageStatus(usuario, nome, "Um ou mais campos foram deixados vazios.", "erro");
@@ -7559,7 +7612,6 @@ public class Inicial extends javax.swing.JFrame {
             m.setLocationRelativeTo(null);
             m.setVisible(true);
         } else {
-            System.out.println("CERTO");
             Reserva r = new Reserva();
             r.id_hospede = Integer.parseInt(idHospResModTxt.getText().replace("'", ""));
             r.num_quarto = Integer.parseInt(numQuaResModTxt.getText().replace("'", ""));
@@ -7571,9 +7623,9 @@ public class Inicial extends javax.swing.JFrame {
             r.atualizar();
             resetCampos();
         }
-        
-            
-        
+
+
+
     }//GEN-LAST:event_modificarReservaBtnMouseClicked
 
     private void idReservaModKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_idReservaModKeyTyped
@@ -7635,6 +7687,7 @@ public class Inicial extends javax.swing.JFrame {
         if (evt.getKeyCode() == java.awt.event.KeyEvent.VK_ENTER) {
             consumoResModTxt.requestFocus();
         }
+        nomeHospResTxt.setText(new Conection().nameHospReserva(idHospResModTxt.getText()));
     }//GEN-LAST:event_idHospResModTxtKeyPressed
 
     private void numQuaResModTxtKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_numQuaResModTxtKeyPressed
@@ -7721,23 +7774,23 @@ public class Inicial extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_descPagModTxtKeyPressed
 
-    private void diaLem1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_diaLem1KeyPressed
+    private void diaLemModKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_diaLemModKeyPressed
         if (evt.getKeyCode() == java.awt.event.KeyEvent.VK_ENTER) {
-            mesLem1.requestFocus();
+            mesLemMod.requestFocus();
         }
-    }//GEN-LAST:event_diaLem1KeyPressed
+    }//GEN-LAST:event_diaLemModKeyPressed
 
-    private void mesLem1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_mesLem1KeyPressed
+    private void mesLemModKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_mesLemModKeyPressed
         if (evt.getKeyCode() == java.awt.event.KeyEvent.VK_ENTER) {
-            anoLem1.requestFocus();
+            anoLemMod.requestFocus();
         }
-    }//GEN-LAST:event_mesLem1KeyPressed
+    }//GEN-LAST:event_mesLemModKeyPressed
 
-    private void anoLem1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_anoLem1KeyPressed
+    private void anoLemModKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_anoLemModKeyPressed
         if (evt.getKeyCode() == java.awt.event.KeyEvent.VK_ENTER) {
             cadastrarLemBtn1.requestFocus();
         }
-    }//GEN-LAST:event_anoLem1KeyPressed
+    }//GEN-LAST:event_anoLemModKeyPressed
 
     private void cadastrarLemBtn1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cadastrarLemBtn1MouseClicked
         erroLem1.setText("");
@@ -7756,7 +7809,7 @@ public class Inicial extends javax.swing.JFrame {
             l.assunto = assuntoLemModTxt.getText().replace("'", " ");
             l.descricao = descLemModTxt.getText().replace("'", " ");
             l.idLembrete = Integer.parseInt(idLemModTxt.getText());
-            l.data = anoLem1.getSelectedItem() + "-" + mesLem1.getSelectedItem() + "-" + diaLem1.getSelectedItem();
+            l.data = anoLemMod.getSelectedItem() + "-" + mesLemMod.getSelectedItem() + "-" + diaLemMod.getSelectedItem();
             l.atualizar();
             resetCampos();
         }
@@ -8350,7 +8403,7 @@ public class Inicial extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> anoEntradaReserva;
     private javax.swing.JComboBox<String> anoEntradaReservaMod;
     private javax.swing.JComboBox<String> anoLem;
-    private javax.swing.JComboBox<String> anoLem1;
+    private javax.swing.JComboBox<String> anoLemMod;
     private javax.swing.JComboBox<String> anoNascFuncionarioTxt;
     private javax.swing.JComboBox<String> anoNascHospedeTxt;
     private javax.swing.JComboBox<String> anoPag;
@@ -8458,7 +8511,7 @@ public class Inicial extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> diaEntradaReserva;
     private javax.swing.JComboBox<String> diaEntradaReservaMod;
     private javax.swing.JComboBox<String> diaLem;
-    private javax.swing.JComboBox<String> diaLem1;
+    private javax.swing.JComboBox<String> diaLemMod;
     private javax.swing.JComboBox<String> diaNascFuncionarioTxt;
     private javax.swing.JComboBox<String> diaNascHospedeTxt;
     private javax.swing.JComboBox<String> diaPag;
@@ -8661,7 +8714,7 @@ public class Inicial extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> mesEntradaReserva;
     private javax.swing.JComboBox<String> mesEntradaReservaMod;
     private javax.swing.JComboBox<String> mesLem;
-    private javax.swing.JComboBox<String> mesLem1;
+    private javax.swing.JComboBox<String> mesLemMod;
     private javax.swing.JComboBox<String> mesNascFuncionarioTxt;
     private javax.swing.JComboBox<String> mesNascHospedeTxt;
     private javax.swing.JComboBox<String> mesPag;
